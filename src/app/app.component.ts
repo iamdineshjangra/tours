@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  apiBase:string = 'http://localhost:8080/'
+  apiBase:string = 'http://localhost:4100/'
   title: object | undefined | null
   constructor(private http: HttpClient) {}
   createTour() {

@@ -1,16 +1,16 @@
 const express = require("express");
-const cors = require("cors");
+const app = express();
+const cors = require('cors')
 const morgan = require('morgan');
+require('dotenv').config({path: './config.env'});
 const db = require("./app/models/index");
 const tourRoutes = require('./app/routes/tourRoutes');
-const app = express();
-var corsOptions = {
-  origin: "http://localhost:54898"
-};
-app.use(cors(corsOptions));
 // parse requests of content-type - application/json
 app.use(express.json());
-app.use(morgan('dev'));
+app.use(cors())
+if(process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 db.sequelize.sync()
   .then(() => {
     console.log("Synced db.");
