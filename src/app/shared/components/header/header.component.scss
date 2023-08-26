@@ -1,0 +1,23 @@
+@import url('../../../../styles.scss');
+
+.nav-log-text {
+    font-size: 2.5rem;
+    text-decoration: none;
+    color: Red;
+    margin-right: 50px;
+}
+
+.nav-font-weight {
+   font-weight: 1.5rem;
+}
+
+.dropdown-toggle::after {
+    position: absolute;
+    top: 18px;
+}
+
+@media only screen and (min-width: 992px) {
+    .nav-form {
+        width: 650px;
+    }
+}
