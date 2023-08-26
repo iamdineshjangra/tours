@@ -1,17 +1,18 @@
 const express = require("express");
 const app = express();
-const cors = require('cors')
-const morgan = require('morgan');
-require('dotenv').config({path: './config.env'});
+const cors = require("cors");
+const morgan = require("morgan");
+require("dotenv").config({ path: "./config.env" });
 const db = require("./app/models/index");
-const tourRoutes = require('./app/routes/tourRoutes');
-// parse requests of content-type - application/json
+const tourRoutes = require("./app/routes/tourRoutes");
+
 app.use(express.json());
-app.use(cors())
-if(process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
+app.use(cors());
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
 }
-db.sequelize.sync()
+db.sequelize
+  .sync()
   .then(() => {
     console.log("Synced db.");
   })
@@ -19,7 +20,7 @@ db.sequelize.sync()
     console.log("Failed to sync db: " + err.message);
   });
 
-app.use('/tours', tourRoutes);
+app.use("/tours", tourRoutes);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
