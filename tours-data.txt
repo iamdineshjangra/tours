@@ -1,0 +1,71 @@
+{
+    "title": "Tour to Kailash",
+    "organizer": "Dinesh Jangra",
+    "maxPersonCapacity": 51,
+    "amountPerHead": 2000,
+    "image": "src/assets/images/kailash.jpg"
+}
+
+{
+    "title": "Tour to Kedarnath",
+    "organizer": "Dinesh Jangra",
+    "maxPersonCapacity": 59,
+    "amountPerHead": 10000,
+    "image": "src/assets/images/kedarnath.jpg"
+}
+
+{
+    "title": "Tour to Manali",
+    "organizer": "Dinesh Jangra",
+    "maxPersonCapacity": 70,
+    "amountPerHead": 10000,
+    "image": "src/assets/images/manali.jpg"
+}
+
+{
+    "title": "Tour to Musoorie",
+    "organizer": "Deepak Jangra",
+    "maxPersonCapacity": 97,
+    "amountPerHead": 12000,
+    "image": "src/assets/images/Mussoorie.jpg"
+}
+
+{
+    "title": "Tour to Ram Setu Bridge",
+    "organizer": "Deepak Jangra",
+    "maxPersonCapacity": 85,
+    "amountPerHead": 17000,
+    "image": "src/assets/images/ram-setu-bridge.jpg"
+}
+
+{
+    "title": "Tour to Shimla",
+    "organizer": "Deepak Jangra",
+    "maxPersonCapacity": 72,
+    "amountPerHead": 8000,
+    "image": "src/assets/images/Shimla.jpg"
+}
+
+{
+    "title": "Tour to Taj-Mahal",
+    "organizer": "Kiran Jangra",
+    "maxPersonCapacity": 92,
+    "amountPerHead": 15000,
+    "image": "src/assets/images/taj-mahal.jpg"
+}
+
+{
+    "title": "Tour to Utrakhand",
+    "organizer": "Kiran Jangra",
+    "maxPersonCapacity": 89,
+    "amountPerHead": 7000,
+    "image": "src/assets/images/utrakhand.jpg"
+}
+
+{
+    "title": "Tour to Varindavan",
+    "organizer": "Kiran Jangra",
+    "maxPersonCapacity": 74,
+    "amountPerHead": 4000,
+    "image": "src/assets/images/varindavan.jpg"
+}

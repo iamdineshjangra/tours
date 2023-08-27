@@ -54,6 +54,10 @@ module.exports = (sequelize, Sequelize, DataType) => {
         },
       },
     },
+    image: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
     startDate: {
       type: Sequelize.DATE,
       defaultValue: new Date(Date.now() + 24 * 60 * 60 * 1000),
