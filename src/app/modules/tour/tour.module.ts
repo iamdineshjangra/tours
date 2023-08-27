@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TourComponent } from './components/tour/tour.component';
 import { ToursComponent } from './components/tours/tours.component';
+import { TourRoutingModule } from './tour-routing.module';
 
 
 
@@ -11,7 +12,8 @@ import { ToursComponent } from './components/tours/tours.component';
     ToursComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    TourRoutingModule
   ]
 })
 export class TourModule { }

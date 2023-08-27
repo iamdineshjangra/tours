@@ -7,7 +7,7 @@ import { Tour } from '../models/tour';
   providedIn: 'root',
 })
 export class TourService {
-  apiUrl = 'https://localhost:4100/api/v1/tours';
+  apiUrl = 'http://localhost:4100/api/v1/tours';
   constructor(private http: HttpClient) {}
   getAllTours(): Observable<Tour[]> {
     return this.http.get<Tour[]>(this.apiUrl);
