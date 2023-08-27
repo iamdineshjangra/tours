@@ -16,15 +16,13 @@ export class ToursComponent implements OnInit {
   }
 
   getAllTours() {
-    this.tourService.getAllTours().subscribe(
-      (data) => {
-        if (data) {
-          this.tours = data;
-        }
+    this.tourService.getAllTours().subscribe({
+      next: (data) => {
+        this.tours = data;
       },
-      (err) => {
-        console.log(err.error.errMessage)
+      error: (error) => {
+        console.log(error.error.errMessage)
       }
-    )
+    })
   }
 }
