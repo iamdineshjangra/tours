@@ -18,7 +18,9 @@ export class ToursComponent implements OnInit {
   getAllTours() {
     this.tourService.getAllTours().subscribe({
       next: (data) => {
-        this.tours = data;
+        if(data && data.tours) {
+          this.tours = data.tours;
+        }
       },
       error: (error) => {
         console.log(error.error.errMessage)

@@ -7,3 +7,8 @@ export interface Tour {
     startDate: Date | null | undefined,
     endDate: Date | null | undefined
 }
+
+export interface ResponseTour extends Tour {
+    status: string,
+    tours: Tour[]
+}
