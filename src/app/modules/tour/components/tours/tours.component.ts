@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Tour } from 'src/app/core/models/tour';
 import { TourService } from 'src/app/core/services/tour.service';
 
@@ -9,17 +10,17 @@ import { TourService } from 'src/app/core/services/tour.service';
 })
 export class ToursComponent implements OnInit {
   tours: Tour[] = [];
-  constructor(private tourService: TourService) {}
+  constructor(private tourService: TourService, private routes: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.getAllTours();
   }
 
   getAllTours() {
-    this.tourService.getAllTours().subscribe({
+    this.routes.data.subscribe({
       next: (data) => {
-        if(data && data.tours) {
-          this.tours = data.tours;
+        if(data && data['tours'] && data['tours'].tours) {
+          this.tours = data['tours'].tours;
         }
       },
       error: (error) => {
