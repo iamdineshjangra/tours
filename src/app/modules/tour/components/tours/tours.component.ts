@@ -14,12 +14,17 @@ export class ToursComponent implements OnInit {
   ngOnInit(): void {
     this.getAllTours();
   }
-  
+
   getAllTours() {
-    this.tourService.getAllTours().subscribe((data) => {
-      if (data) {
-        this.tours = data;
+    this.tourService.getAllTours().subscribe(
+      (data) => {
+        if (data) {
+          this.tours = data;
+        }
+      },
+      (err) => {
+        console.log(err.error.errMessage)
       }
-    });
+    )
   }
 }
