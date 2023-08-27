@@ -1,20 +1,20 @@
 const db = require("../models");
 
-// exports.getTours = async (req, res) => {
-//   try {
-//     const tours = db.Tour.findAll();
-//     return res.status(200).json({
-//       status: "success",
-//       err: err,
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     return res.status(500).json({
-//       status: "fail",
-//       errMessage: "Error while getting all tours",
-//     });
-//   }
-// };
+exports.getTours = async (req, res) => {
+  try {
+    const tours = await db.tours.findAll();
+    return res.status(200).json({
+      status: "success",
+      tours
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      status: "fail",
+      errMessage: "Error while getting all tours",
+    });
+  }
+};
 
 exports.createTour = async (req, res) => {
   try {
