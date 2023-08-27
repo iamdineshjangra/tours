@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Tour } from 'src/app/core/models/tour';
+import { TourService } from 'src/app/core/services/tour.service';
 
 @Component({
   selector: 'app-tours',
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./tours.component.scss']
 })
 export class ToursComponent {
-
+  tours: Tour[] = [];
+  constructor(private tourService: TourService) {}
+  getAllTours() {
+    this.tourService.getAllTours().subscribe((data) => {
+      if(data) {
+        this.tours = data
+      }
+    })
+  }
 }

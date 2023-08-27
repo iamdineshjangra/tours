@@ -20,7 +20,7 @@ db.sequelize
     console.log("Failed to sync db: " + err.message);
   });
 
-app.use("/tours", tourRoutes);
+app.use("/api/v1/tours", tourRoutes);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
