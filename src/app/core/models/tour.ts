@@ -4,6 +4,7 @@ export interface Tour {
     organizer: string,
     maxPersonCapacity: number,
     amountPerHead: number,
+    image: string,
     startDate: Date | null | undefined,
     endDate: Date | null | undefined
 }

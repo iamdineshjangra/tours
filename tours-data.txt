@@ -3,7 +3,7 @@
     "organizer": "Dinesh Jangra",
     "maxPersonCapacity": 51,
     "amountPerHead": 2000,
-    "image": "src/assets/images/kailash.jpg"
+    "image": "assets/images/kailash.jpg"
 }
 
 {
@@ -11,7 +11,7 @@
     "organizer": "Dinesh Jangra",
     "maxPersonCapacity": 59,
     "amountPerHead": 10000,
-    "image": "src/assets/images/kedarnath.jpg"
+    "image": "assets/images/kedarnath.jpg"
 }
 
 {
@@ -19,7 +19,7 @@
     "organizer": "Dinesh Jangra",
     "maxPersonCapacity": 70,
     "amountPerHead": 10000,
-    "image": "src/assets/images/manali.jpg"
+    "image": "assets/images/manali.jpg"
 }
 
 {
@@ -27,15 +27,15 @@
     "organizer": "Deepak Jangra",
     "maxPersonCapacity": 97,
     "amountPerHead": 12000,
-    "image": "src/assets/images/Mussoorie.jpg"
+    "image": "assets/images/Mussoorie.jpg"
 }
 
 {
-    "title": "Tour to Ram Setu Bridge",
+    "title": "Tour to Ram-Setu Bridge",
     "organizer": "Deepak Jangra",
     "maxPersonCapacity": 85,
     "amountPerHead": 17000,
-    "image": "src/assets/images/ram-setu-bridge.jpg"
+    "image": "assets/images/ram-setu-bridge.png"
 }
 
 {
@@ -43,7 +43,7 @@
     "organizer": "Deepak Jangra",
     "maxPersonCapacity": 72,
     "amountPerHead": 8000,
-    "image": "src/assets/images/Shimla.jpg"
+    "image": "assets/images/Shimla.jpg"
 }
 
 {
@@ -51,7 +51,7 @@
     "organizer": "Kiran Jangra",
     "maxPersonCapacity": 92,
     "amountPerHead": 15000,
-    "image": "src/assets/images/taj-mahal.jpg"
+    "image": "assets/images/taj-mahal.jpg"
 }
 
 {
@@ -59,7 +59,7 @@
     "organizer": "Kiran Jangra",
     "maxPersonCapacity": 89,
     "amountPerHead": 7000,
-    "image": "src/assets/images/utrakhand.jpg"
+    "image": "assets/images/utrakhand.jpg"
 }
 
 {
@@ -67,5 +67,5 @@
     "organizer": "Kiran Jangra",
     "maxPersonCapacity": 74,
     "amountPerHead": 4000,
-    "image": "src/assets/images/varindavan.jpg"
+    "image": "assets/images/varindavan.jpg"
 }
