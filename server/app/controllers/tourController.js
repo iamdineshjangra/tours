@@ -5,7 +5,7 @@ exports.getTours = async (req, res) => {
     const tours = await db.tours.findAll();
     return res.status(200).json({
       status: "success",
-      tours
+      tours,
     });
   } catch (err) {
     console.log(err);
@@ -29,6 +29,36 @@ exports.createTour = async (req, res) => {
     return res.status(500).json({
       status: "fail",
       errMessage: "Error while creating tours",
+    });
+  }
+};
+
+exports.getTour = async (req, res) => {
+  try {
+    const tourId = req.params.tourId;
+    if (!tourId) {
+      return res.status(400).json({
+        status: "fail",
+        errMessage:
+          "Please provide tour Id in the endpoint to see tour details",
+      });
+    }
+    const tour = await db.tours.findByPk(tourId);
+    if (!tour) {
+      return res.status(404).json({
+        status: "fail",
+        errMessage: "tour not found",
+      });
+    }
+    return res.status(200).json({
+      status: "success",
+      tour,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      status: "fail",
+      errMessage: "Error while finding tour",
     });
   }
 };

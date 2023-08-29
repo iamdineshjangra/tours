@@ -9,7 +9,12 @@ export interface Tour {
     endDate: Date | null | undefined
 }
 
-export interface ResponseTour extends Tour {
+export interface ToursResponse {
     status: string,
     tours: Tour[]
+}
+
+export interface TourResponse {
+    status: string,
+    tour: Tour
 }
