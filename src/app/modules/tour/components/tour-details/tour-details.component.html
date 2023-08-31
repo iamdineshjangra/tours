@@ -1,1 +1,77 @@
-<p>tour-details works!</p>
+<!-- <div *ngIf="tour" class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-lg-4">
+            <img class="img-fluid" [src] = "tour.image">
+        </div>
+        <div class="col-lg-4 border border-secondary">
+            <h1>Title: {{tour.title}}</h1>
+            <p>Organizer: {{tour.organizer}}</p>
+            <p>Total Capacity: {{tour.maxPersonCapacity}} Person</p>
+            <p>Amount For Booking: {{tour.amountPerHead}}</p>
+            <p>Tour Start Date: {{tour.startDate}}</p>
+            <p>Tour End Date: {{tour.endDate}}</p>
+        </div>
+    </div>
+</div> -->
+
+
+<!-- <div class="card mb-3">
+    <img src="../../../../../assets//images/kailash.jpg" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+    <img src="..." class="card-img-top" alt="...">
+  </div> -->
+
+
+<!-- <div *ngIf="tour" class="card mb-3 mt-5" style="max-width: 540px;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img [src] = "tour.image" class="card-img img-fluid" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h1 class="card-title">{{tour.title}}</h1>
+          <p class="card-text">Organizer: {{tour.organizer}}</p>
+          <p class="card-text">Total Capacity: {{tour.maxPersonCapacity}} Person</p>
+          <p class="card-text">Amount For Booking: {{tour.amountPerHead}}</p>
+          <p class="card-text">Tour Start Date: {{tour.startDate}}</p>
+          <p class="card-text">Tour End Date: {{tour.endDate}}</p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+<!-- <div *ngIf="tour" class="card mt-5" style="width: 40rem;">
+  <img class="card-img-top" [src]="tour.image" alt="Card image cap">
+  <div class="card-body">
+    <h1 class="card-title">{{tour.title}}</h1>
+    <p class="card-text">Organizer: {{tour.organizer}}</p>
+    <p class="card-text">Total Capacity: {{tour.maxPersonCapacity}} Person</p>
+    <p class="card-text">Amount For Booking: {{tour.amountPerHead}}</p>
+    <p class="card-text">Tour Start Date: {{tour.startDate}}</p>
+    <p class="card-text">Tour End Date: {{tour.endDate}}</p>
+  </div>
+</div> -->
+
+<div *ngIf="tour" class="card mb-5 mt-5 mx-auto tour-details-card">
+  <img class="card-img-top" [src]="tour.image" alt="Card image cap">
+  <div class="card-body">
+    <h1 class="card-title">Title: {{tour.title}}</h1>
+    <p class="card-text">Organizer: {{tour.organizer}}</p>
+    <p class="card-text">Total Capacity: {{tour.maxPersonCapacity}} Person</p>
+    <p class="card-text">Amount For Booking: {{tour.amountPerHead}}</p>
+    <p class="card-text">Tour Start Date: {{tour.startDate}}</p>
+    <p class="card-text">Tour End Date: {{tour.endDate}}</p>
+  </div>
+</div>

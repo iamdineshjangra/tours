@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TourResponse } from 'src/app/core/models/tour';
+import { Tour, TourResponse } from 'src/app/core/models/tour';
 
 @Component({
   selector: 'app-tour-details',
@@ -8,10 +8,11 @@ import { TourResponse } from 'src/app/core/models/tour';
   styleUrls: ['./tour-details.component.scss'],
 })
 export class TourDetailsComponent {
-  tour: TourResponse | null | undefined = null;
+  tour: Tour | null | undefined = null;
   constructor(private route: ActivatedRoute) {
     this.getTour()
   }
+  
   getTour() {
     this.route.data.subscribe({
       next: (data) => {

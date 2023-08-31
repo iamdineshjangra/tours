@@ -1,0 +1,17 @@
+.tour-details-card {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.card-img-top {
+    height: 40vh;
+}
+
+@media only screen and (max-width: 692px) {
+    .tour-details-card {
+        width:90%
+    }
+}

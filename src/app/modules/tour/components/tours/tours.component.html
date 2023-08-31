@@ -2,13 +2,14 @@
     <div class="row d-flex justify-content-center">
         <div class="col-lg-4 col-md-6 col-sm-6 col-10 card-margin" *ngFor="let tour of tours">
             <div class="card" style="width: 17rem;">
-                <img [src]="tour.image" class="card-img-top card-image" alt="...">
+                <img [src]="tour.image" class="card-img-top card-image image-cursor"
+                    (click)="goToTourDetailsPage(tour.id)">
                 <div class="card-body text-center">
                     <h5 class="card-title" style="font-weight:bold;">Title : {{tour.title}}</h5>
                     <h6 style="font-weight:bold;">Booking Amount: {{tour.amountPerHead | currency:
                         'INR'}}</h6>
                     <p class="card-text">Organizer : {{tour.organizer}}</p>
-                    <a href="#" class="btn btn-primary">See Tour Details</a>
+                    <button class="btn btn-primary" (click)="goToTourDetailsPage(tour.id)">See Tour Details</button>
                 </div>
             </div>
         </div>

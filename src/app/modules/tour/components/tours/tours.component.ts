@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Tour } from 'src/app/core/models/tour';
 import { TourService } from 'src/app/core/services/tour.service';
 
@@ -12,7 +12,8 @@ export class ToursComponent implements OnInit {
   tours: Tour[] = [];
   constructor(
     private tourService: TourService,
-    private routes: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -20,7 +21,7 @@ export class ToursComponent implements OnInit {
   }
 
   getAllTours() {
-    this.routes.data.subscribe({
+    this.route.data.subscribe({
       next: (data) => {
         if (
           data &&
@@ -35,5 +36,9 @@ export class ToursComponent implements OnInit {
         console.log(error.error.errMessage);
       },
     });
+  }
+
+  goToTourDetailsPage(tourId: number) {
+    return this.router.navigate(['api/v1/tours', tourId]);
   }
 }
