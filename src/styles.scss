@@ -11,3 +11,10 @@ body {
 .image-cursor {
   cursor: pointer;
 }
+
+.show-user-error-or-not-found {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 40vh;
+}

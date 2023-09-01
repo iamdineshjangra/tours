@@ -9,15 +9,24 @@ import { Tour, TourResponse } from 'src/app/core/models/tour';
 })
 export class TourDetailsComponent {
   tour: Tour | null | undefined = null;
+  errMessage: string = '';
   constructor(private route: ActivatedRoute) {
-    this.getTour()
+    this.getTour();
   }
-  
+
   getTour() {
     this.route.data.subscribe({
       next: (data) => {
         if (data && data['tour'] && data['tour'].tour) {
           this.tour = data['tour'].tour;
+        }
+        if (
+          data &&
+          data['tour'] &&
+          data['tour'].error &&
+          data['tour'].error.errMessage
+        ) {
+          this.errMessage = data['tour'].error.errMessage;
         }
       },
       error: (err) => {

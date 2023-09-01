@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="tours && tours.length" class="container">
     <div class="row d-flex justify-content-center">
         <div class="col-lg-4 col-md-6 col-sm-6 col-10 card-margin" *ngFor="let tour of tours">
             <div class="card" style="width: 17rem;">
@@ -14,4 +14,12 @@
             </div>
         </div>
     </div>
+</div>
+
+<div *ngIf="tours && tours.length === 0 && !errMessage" class="show-user-error-or-not-found">
+    <h1>No Tour Available...</h1>
+</div>
+
+<div *ngIf="errMessage" class="show-user-error-or-not-found">
+    <h1>{{errMessage}}</h1>
 </div>

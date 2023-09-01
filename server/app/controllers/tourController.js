@@ -47,7 +47,7 @@ exports.getTour = async (req, res) => {
     if (!tour) {
       return res.status(404).json({
         status: "fail",
-        errMessage: "tour not found",
+        errMessage: "Tour not found",
       });
     }
     return res.status(200).json({

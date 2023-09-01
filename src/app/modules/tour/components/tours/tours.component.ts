@@ -10,6 +10,7 @@ import { TourService } from 'src/app/core/services/tour.service';
 })
 export class ToursComponent implements OnInit {
   tours: Tour[] = [];
+  errMessage: string = '';
   constructor(
     private tourService: TourService,
     private route: ActivatedRoute,
@@ -31,9 +32,20 @@ export class ToursComponent implements OnInit {
         ) {
           this.tours = data['tours'].tours;
         }
+        if (
+          data &&
+          data['tours'] &&
+          data['tours'].error &&
+          data['tours'].error.errMessage
+        ) {
+          this.errMessage = data['tours'].error.errMessage;
+          console.error(this.errMessage);
+          return;
+        }
       },
       error: (error) => {
-        console.log(error.error.errMessage);
+        this.errMessage = error.error.errMessage;
+        console.error(error.error.errMessage);
       },
     });
   }
