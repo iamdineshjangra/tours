@@ -15,9 +15,11 @@ exports.signup = async (req, res) => {
         })
     }
     const user = await authService.signup(req.body);
+    const token = authService.createJwtToken(user.id);
     return res.status(201).json({
         status: 'success',
-        user: user
+        user: user,
+        token: token
     })
   } catch (err) {
     console.log(err);
