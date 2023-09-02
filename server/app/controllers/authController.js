@@ -1,5 +1,4 @@
-const db = require("../models/index");
-
+const authService = require('../services/authService');
 exports.signup = async (req, res) => {
   try {
     const { firstName, lastName, role, email, password } = req.body;
@@ -15,7 +14,7 @@ exports.signup = async (req, res) => {
             errMessage: 'This api is not to add role. Please do a hit to other api to achieve this.'
         })
     }
-    const user = await db.User.create(req.body);
+    const user = await authService.signup(req.body);
     return res.status(201).json({
         status: 'success',
         user: user

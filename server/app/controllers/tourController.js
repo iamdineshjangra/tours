@@ -1,8 +1,8 @@
-const db = require("../models");
+const tourService = require('../services/tourService');
 
 exports.getTours = async (req, res) => {
   try {
-    const tours = await db.Tour.findAll();
+    const tours = await tourService.getTours();
     return res.status(200).json({
       status: "success",
       tours,
@@ -19,7 +19,7 @@ exports.getTours = async (req, res) => {
 exports.createTour = async (req, res) => {
   try {
     const tour = req.body;
-    const newTour = await db.Tour.create(tour);
+    const newTour = await tourService.createTour(tour);
     return res.status(201).json({
       status: "success",
       tour: newTour,
@@ -43,7 +43,7 @@ exports.getTour = async (req, res) => {
           "Please provide tour Id in the endpoint to see tour details",
       });
     }
-    const tour = await db.Tour.findByPk(tourId);
+    const tour = await tourService.getTour(tourId);
     if (!tour) {
       return res.status(404).json({
         status: "fail",
