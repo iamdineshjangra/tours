@@ -5,7 +5,7 @@ const morgan = require("morgan");
 require("dotenv").config({ path: "./config.env" });
 const db = require("./app/models/index");
 const tourRoutes = require("./app/routes/tourRoutes");
-
+const userRoutes = require("./app/routes/userRoutes")
 app.use(express.json());
 app.use(cors());
 if (process.env.NODE_ENV === "development") {
@@ -21,6 +21,7 @@ db.sequelize
   });
 
 app.use("/api/v1/tours", tourRoutes);
+app.use("/api/v1/users", userRoutes);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

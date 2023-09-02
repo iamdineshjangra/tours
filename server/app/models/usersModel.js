@@ -11,8 +11,8 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
             allowNull: false,
             validate: {
                 len: {
-                    args:[1, 15],
-                    msg: 'User first name should nbe between 1 to 15 characters'
+                    args:[2, 15],
+                    msg: 'User first name should be between 2 to 15 characters'
                 }
             }
         },
@@ -21,8 +21,8 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
             allowNull: false,
             validate: {
                 len: {
-                    args:[1, 15],
-                    msg: 'User first name should nbe between 1 to 15 characters'
+                    args:[5, 15],
+                    msg: 'User last name should be between 5 to 15 characters'
                 }
             }
         },
@@ -32,8 +32,7 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
             unique: true,
             validate: {
                 isEmail: {
-                    args: [true],
-                    email: 'Email should be of type email'
+                    msg: 'Email should be of type email'
                 }
             }
         },
@@ -49,7 +48,7 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         },
         role: {
             type: Sequelize.ENUM('user', 'organizer', 'admin'),
-            allowNull: false,
+            defaultValue: 'user',
             validate: {
                 isIn: {
                     args: ['user', 'organizer', 'admin'],
