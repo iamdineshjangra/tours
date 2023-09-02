@@ -27,6 +27,10 @@
                 </div>
             </div>
             <button class="btn btn-primary form-button" [disabled]="!loginForm.valid">Login</button>
+            <div class="d-flex flex-column mt-3">
+                <h6 class="text-center">Not Having an account?</h6>
+                <a class="text-center text-decoration-none" routerLink="/api/v1/signup">Signup</a>
+            </div>
         </form>
     </div>
 </div>

@@ -1,5 +1,5 @@
 <div class="container-fluid ">
-    <div class="row mt-5 mb-3 form-row">
+    <div class="row mt-5 form-row">
         <form class="col-md-6 col-sm-11 col-11 form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <div>
                 <label class="d-block form-label">First Name</label>
@@ -53,6 +53,10 @@
                 </div>
             </div>
             <button class="btn btn-primary form-button" [disabled]="!signupForm.valid">Login</button>
+            <div class="d-flex flex-column mt-3">
+                <h6 class="text-center">Already have an account?</h6>
+                <a class="text-center text-decoration-none" routerLink="/api/v1/login">Login</a>
+            </div>
         </form>
     </div>
 </div>
