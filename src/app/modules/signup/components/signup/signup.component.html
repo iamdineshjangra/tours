@@ -1,6 +1,6 @@
 <div class="container-fluid ">
     <div class="row mt-5 mb-3 form-row">
-        <form class="col-md-6 col-sm-11 col-11 form" [formGroup]="signupForm">
+        <form class="col-md-6 col-sm-11 col-11 form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <div>
                 <label class="d-block form-label">First Name</label>
                 <input class="form-control d-block form-field-input" type="text" placeholder="Dinesh"

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ToursResponse, TourResponse } from '../models/tour';
+import { ToursResponse, TourResponse, Tour} from '../models/tour';
 
 @Injectable({
   providedIn: 'root',

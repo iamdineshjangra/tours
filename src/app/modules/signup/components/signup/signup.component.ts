@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Signup, UserResponse } from '../../../../../app/core/models/user';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -13,7 +14,7 @@ export class SignupComponent implements OnInit {
     '(?=.*[a-z])(?=.*[A-Z])' +
     '(?=.*[@#$%^&+=])' +
     '(?=\\S+$).{8,20}$';
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
@@ -43,5 +44,20 @@ export class SignupComponent implements OnInit {
 
   get f() {
     return this.signupForm.controls;
+  }
+
+  onSubmit() {
+    if(this.signupForm.invalid) {
+      return;
+    }
+    this.authService.signup(this.signupForm.value).subscribe({
+      next: (data) => {
+        console.log('Account created successfully')
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    })
+
   }
 }
