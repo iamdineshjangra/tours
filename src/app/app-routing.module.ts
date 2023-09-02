@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'api/v1/login',
     loadChildren: () => import('../app/modules/login/login.module').then(m => m.LoginModule)
+  },
+  {
+    path: 'api/v1/signup',
+    loadChildren: () => import('../app/modules/signup/signup.module').then(m => m.SignupModule)
   }
 ];
 

@@ -1,0 +1,58 @@
+<div class="container-fluid ">
+    <div class="row mt-5 mb-3 form-row">
+        <form class="col-md-6 col-sm-11 col-11 form" [formGroup]="signupForm">
+            <div>
+                <label class="d-block form-label">First Name</label>
+                <input class="form-control d-block form-field-input" type="text" placeholder="Dinesh"
+                    formControlName="firstName" required>
+            </div>
+            <div *ngIf="f.firstName.errors">
+                <div *ngIf="f.firstName.errors.required && f.firstName.touched" class="text-danger">First Name is
+                    required</div>
+                <div *ngIf="f.firstName.errors.minlength && f.firstName.touched" class="text-danger">First Name minimum
+                    length should be 2 characters long</div>
+                <div *ngIf="f.firstName.errors.maxlength && f.firstName.touched" class="text-danger">First Name maximum
+                    length can be 15 characters long</div>
+            </div>
+            <div>
+                <label class="d-block form-label">Last Name</label>
+                <input class="form-control d-block form-field-input" type="text" placeholder="Jangra"
+                    formControlName="lastName" required>
+            </div>
+            <div *ngIf="f.lastName.errors">
+                <div *ngIf="f.lastName.errors.required && f.lastName.touched" class="text-danger">Last Name is required
+                </div>
+                <div *ngIf="f.lastName.errors.minlength && f.lastName.touched" class="text-danger">Last Name minimum
+                    length should be 5 characters long</div>
+                <div *ngIf="f.lastName.errors.maxlength && f.lastName.touched" class="text-danger">Last Name maximum
+                    length can be 15 characters long</div>
+            </div>
+            <div>
+                <label class="d-block form-label">Email Address</label>
+                <input class="form-control d-block form-field-input" type="email" placeholder="example@gmail.com"
+                    formControlName="email" required>
+            </div>
+            <div *ngIf="f.email.errors">
+                <div *ngIf="f.email.errors.required && f.email.touched" class="text-danger">Email is required</div>
+                <div *ngIf="f.email.errors.email && f.email.touched" class="text-danger">Email must be
+                    a valid email
+                    address</div>
+            </div>
+            <div>
+                <label class="d-block form-label">Password</label>
+                <input class="form-control d-block form-field-input" type="password" formControlName="password"
+                    placeholder="Eample@123" required>
+            </div>
+            <div *ngIf="f.password.errors">
+                <div *ngIf="f.password.errors.required && f.password.touched" class="text-danger">Password is required
+                </div>
+                <div *ngIf="f.password.errors.pattern && f.password.touched" class="text-danger">Password should
+                    have minimum 8 characters and can have maximum 20 characters, at least 1 uppercase letter, 1
+                    lowercase
+                    letter and 1 number
+                </div>
+            </div>
+            <button class="btn btn-primary form-button" [disabled]="!signupForm.valid">Login</button>
+        </form>
+    </div>
+</div>
