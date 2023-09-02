@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt")
 module.exports = (sequelize, Sequelize, DataTypes) => {
     const User = sequelize.define('users', {
         id: {
@@ -59,6 +60,19 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         resetToken: {
             type: Sequelize.STRING
         }
-    })
+    });
+    User.beforeSave(hashPassword);
+    User.prototype.validatePassword = validatePassword
     return User;
 }
+
+const hashPassword = async (user, options) => {
+    if (!user.changed("password")) {
+        return;
+      }
+    user.password = await bcrypt.hash(user.password, 10);
+}
+
+const validatePassword = async function (password) {
+    return await bcrypt.compare(password, this.password);
+};
