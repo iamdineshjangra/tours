@@ -21,7 +21,7 @@ db.sequelize
   });
 
 app.use("/api/v1/tours", tourRoutes);
-app.use("/api/v1/users", userRoutes);
+app.use("/api/v1", userRoutes);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
