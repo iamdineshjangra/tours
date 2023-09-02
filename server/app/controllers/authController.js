@@ -1,34 +1,38 @@
 const db = require("../models/index");
-const authService = require('../services/authService');
-const userService = require('../services/userService')
+const authService = require("../services/authService");
+const userService = require("../services/userService");
+const responseUtils = require("../utils/sendResponse");
 exports.signup = async (req, res) => {
   try {
     const { firstName, lastName, role, email, password } = req.body;
-    if(!firstName || !lastName || !email || !password) {
-        return res.status(400).json({
-            status: 'fail',
-            errMessage: 'Please enter all required field'
-        });
+    if (!firstName || !lastName || !email || !password) {
+      return responseUtils.sendErrorResponse(
+        400,
+        "Please enter all required field",
+        res
+      );
     }
-    if(role) {
-        return res.status(400).json({
-            status: 'fail',
-            errMessage: 'This api is not to add role. Please do a hit to other api to achieve this.'
-        })
+    if (role) {
+      return responseUtils.sendErrorResponse(
+        400,
+        "This api is not to add role. Please do a hit to other api to achieve this.",
+        res
+      );
     }
     const user = await authService.signup(req.body);
     const token = authService.createJwtToken(user.id);
     return res.status(201).json({
-        status: 'success',
-        user: user,
-        token: token
-    })
+      status: "success",
+      user: user,
+      token: token,
+    });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({
-        status: 'fail',
-        errMessage: 'Error while creating user'
-    })
+    return responseUtils.sendErrorResponse(
+      500,
+      "Error while creating user",
+      res
+    );
   }
 };
 
@@ -36,24 +40,25 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      return res.status(400).json({
-        status: "fail",
-        errMessage: "Please enter required fields",
-      });
+      return responseUtils.sendErrorResponse(
+        400,
+        "Please enter required fields",
+        res
+      );
     }
     const user = await userService.getUser(email);
-    const isCorrectPassword = await user.validatePassword(password);
-    if (isCorrectPassword) {
-      const token = authService.createJwtToken(user.id);
-      return res.status(200).json({
-        status: "success",
-        user: user,
-        token: token,
-      });
+    if (!user) {
+      return responseUtils.sendErrorResponse(404, "User not found", res);
     }
-    res.status(401).send({
-      status: "fail",
-      errMessage: "Incorrect password",
+    const isCorrectPassword = await user.validatePassword(password);
+    if (!isCorrectPassword) {
+      return responseUtils.sendErrorResponse(401, "Incorrect password", res);
+    }
+    const token = authService.createJwtToken(user.id);
+    return res.status(200).json({
+      status: "success",
+      user: user,
+      token: token,
     });
   } catch (err) {
     console.log(err);

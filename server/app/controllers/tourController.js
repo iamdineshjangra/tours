@@ -1,5 +1,5 @@
-const tourService = require('../services/tourService');
-
+const tourService = require("../services/tourService");
+const responseUtils = require("../utils/sendResponse");
 exports.getTours = async (req, res) => {
   try {
     const tours = await tourService.getTours();
@@ -9,10 +9,11 @@ exports.getTours = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({
-      status: "fail",
-      errMessage: "Error while getting all tours",
-    });
+    return responseUtils.sendErrorResponse(
+      500,
+      "Error while getting all tours",
+      res
+    );
   }
 };
 
@@ -37,18 +38,15 @@ exports.getTour = async (req, res) => {
   try {
     const tourId = req.params.tourId;
     if (!tourId) {
-      return res.status(400).json({
-        status: "fail",
-        errMessage:
-          "Please provide tour Id in the endpoint to see tour details",
-      });
+      return responseUtils.sendErrorResponse(
+        400,
+        "Please provide tour Id in the endpoint to see tour details",
+        res
+      );
     }
     const tour = await tourService.getTour(tourId);
     if (!tour) {
-      return res.status(404).json({
-        status: "fail",
-        errMessage: "Tour not found",
-      });
+      return responseUtils.sendErrorResponse(404, "Tour not found", res);
     }
     return res.status(200).json({
       status: "success",
@@ -56,9 +54,10 @@ exports.getTour = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({
-      status: "fail",
-      errMessage: "Error while finding tour",
-    });
+    return responseUtils.sendErrorResponse(
+      500,
+      "Error while finding tour",
+      res
+    );
   }
 };
