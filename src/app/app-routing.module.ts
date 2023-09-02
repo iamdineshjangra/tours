@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'api/v1/tours',
     loadChildren: () => import('../app/modules/tour/tour.module').then(m => m.TourModule)
+  },
+  {
+    path: 'api/v1/users/login',
+    loadChildren: () => import('../app/modules/login/login.module').then(m => m.LoginModule)
   }
 ];
 

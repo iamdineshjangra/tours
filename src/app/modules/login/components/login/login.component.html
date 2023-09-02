@@ -1,0 +1,32 @@
+<div class="container-fluid ">
+    <div class="row mt-5 mb-3 login-form-row">
+        <form class="col-md-6 login-form" [formGroup]="loginForm">
+            <div>
+                <label class="d-block form-label">Email Address</label>
+                <input class="form-control d-block form-field-input" type="email" placeholder="example@gmail.com"
+                    formControlName="email" required>
+            </div>
+            <div *ngIf="f.email.errors">
+                <div *ngIf="f.email.errors.required && f.email.touched" class="text-danger">Email is required</div>
+                <div *ngIf="f.email.errors.email && f.email.touched" class="text-danger">Email must be
+                    a valid email
+                    address</div>
+            </div>
+            <div>
+                <label class="d-block form-label">Password</label>
+                <input class="form-control d-block form-field-input" type="password" formControlName="password"
+                    placeholder="Eample@123" required>
+            </div>
+            <div *ngIf="f.password.errors">
+                <div *ngIf="f.password.errors.required && f.password.touched" class="text-danger">Password is required
+                </div>
+                <div *ngIf="f.password.errors.pattern && f.password.touched" class="text-danger">Password should
+                    have minimum 8 characters and can have maximum 20 characters, at least 1 uppercase letter, 1
+                    lowercase
+                    letter and 1 number
+                </div>
+            </div>
+            <button class="btn btn-primary form-button" [disabled]="!loginForm.valid">Login</button>
+        </form>
+    </div>
+</div>

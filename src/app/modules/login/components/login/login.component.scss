@@ -1,0 +1,34 @@
+.login-form-row {
+  display: flex;
+  justify-content: center !important;
+
+  .login-form {
+    padding: 20px;
+    background-color: gainsboro;
+    border-radius: 5px;
+    .form-label {
+      font-size: 1.5rem;
+    }
+
+    .form-field-input {
+      width: 100%;
+      height: 3.5rem;
+      margin-bottom: 10px;
+      font-size: 1.25rem;
+    }
+
+    .form-button {
+      margin-top: 15px;
+      width: 100%;
+      height: 3.5rem !important;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .login-form {
+    border: 0 !important;
+    padding: 10px !important;
+  }
+}
