@@ -17,4 +17,8 @@ export class HeaderComponent implements OnInit {
   isAuthenticated() {
     return this.authService.isAuthenticated();
   }
+
+  logout() {
+    this.authService.logout();
+  }
 }

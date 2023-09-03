@@ -11,6 +11,10 @@ export class AuthService {
   apiUrl = 'http://localhost:4100/api/v1';
   constructor(private http: HttpClient, private router: Router) {}
 
+  isAuthenticated() {
+    return localStorage.getItem('token');
+  }
+
   signup(value: Signup) {
     return this.http
       .post<UserResponse>(`${this.apiUrl}/signup`, value)
@@ -27,7 +31,8 @@ export class AuthService {
       });
   }
 
-  isAuthenticated() {
-    return localStorage.getItem('token');
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['api/v1/login']);
   }
 }
