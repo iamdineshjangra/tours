@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Signup, UserResponse } from '../../../../../app/core/models/user';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -14,9 +15,21 @@ export class SignupComponent implements OnInit {
     '(?=.*[a-z])(?=.*[A-Z])' +
     '(?=.*[@#$%^&+=])' +
     '(?=\\S+$).{8,20}$';
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['api/v1/tours']);
+    }
+  }
 
   ngOnInit(): void {
+    this.signupPageValidation();
+  }
+
+  signupPageValidation() {
     this.signupForm = this.fb.group({
       firstName: [
         '',
@@ -47,9 +60,9 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.signupForm.invalid) {
+    if (this.signupForm.invalid) {
       return;
     }
-    this.authService.signup(this.signupForm.value)
+    this.authService.signup(this.signupForm.value);
   }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,9 +16,21 @@ export class LoginComponent implements OnInit {
     '(?=.*[a-z])(?=.*[A-Z])' +
     '(?=.*[@#$%^&+=])' +
     '(?=\\S+$).{8,20}$';
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    if(this.authService.isAuthenticated()) {
+      this.router.navigate(['api/v1/tours']);
+    }
+  }
 
   ngOnInit(): void {
+    this.loginFormValidation();
+  }
+
+  loginFormValidation() {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: [
