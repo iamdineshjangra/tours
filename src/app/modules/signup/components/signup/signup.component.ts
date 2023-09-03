@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { Signup, UserResponse } from '../../../../../app/core/models/user';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
   signupForm: any = FormGroup;
+  isFormError: boolean = false;
+  isDuplicateEmail: boolean = false;
+  private isFromErrorSubscription: any = Subscription;
+  private isDuplicateEmailSubscription: any = Subscription;
   passwordRegExp: string =
     '^(?=.*[0-9])' +
     '(?=.*[a-z])(?=.*[A-Z])' +
@@ -27,6 +31,8 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.signupPageValidation();
+    this.formErrorSubscribe();
+    this.emailErrorSubscribe();
   }
 
   signupPageValidation() {
@@ -65,4 +71,35 @@ export class SignupComponent implements OnInit {
     }
     this.authService.signup(this.signupForm.value);
   }
+
+  formErrorSubscribe() {
+    this.isFromErrorSubscription = this.authService.isFromError.subscribe({
+       next: (data) => {
+         if(data) {
+           this.isFormError = data;
+           setTimeout(()=>{
+             this.isFormError = false;
+           },3000)
+         }
+       }
+     })
+   }
+
+   emailErrorSubscribe() {
+    this.isDuplicateEmailSubscription = this.authService.isDuplicateEmail.subscribe({
+       next: (data) => {
+         if(data) {
+           this.isDuplicateEmail = data;
+           setTimeout(()=>{
+             this.isDuplicateEmail = false;
+           },3000)
+         }
+       }
+     })
+   }
+ 
+   ngOnDestroy(): void {
+     this.isFromErrorSubscription.unsubscribe();
+     this.isDuplicateEmailSubscription.unsubscribe();
+   }
 }

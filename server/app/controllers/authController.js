@@ -28,10 +28,15 @@ exports.signup = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
+    let modelError = false;
+    if(err && err.name === "SequelizeUniqueConstraintError") {
+      modelError = true;
+    }
     return responseUtils.sendErrorResponse(
       500,
       "Error while creating user",
-      res
+      res,
+      modelError
     );
   }
 };
@@ -62,9 +67,10 @@ exports.login = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    res.status(500).send({
-      status: "fail",
-      errMessage: "Error while login the user",
-    });
+    return responseUtils.sendErrorResponse(
+      500,
+      "Error while login the user",
+      res
+    );
   }
 };

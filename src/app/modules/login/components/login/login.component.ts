@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -8,9 +9,10 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy{
   loginForm: any = FormGroup;
-  submitted = false;
+  isFormError: boolean = false;
+  private isFromErrorSubscription: any = Subscription;
   passwordRegExp: string =
     '^(?=.*[0-9])' +
     '(?=.*[a-z])(?=.*[A-Z])' +
@@ -28,6 +30,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginFormValidation();
+    this.formErrorSubscribe();
   }
 
   loginFormValidation() {
@@ -45,14 +48,27 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
-    // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
     }
-    //True if all the fields are filled
-    if (this.submitted) {
-      alert('Great!!');
-    }
+    this.authService.login(this.loginForm.value);
   }
+
+  formErrorSubscribe() {
+   this.isFromErrorSubscription = this.authService.isFromError.subscribe({
+      next: (data) => {
+        if(data) {
+          this.isFormError = data;
+          setTimeout(()=>{
+            this.isFormError = false;
+          },3000)
+        }
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.isFromErrorSubscription.unsubscribe();
+  }
+
 }

@@ -1,6 +1,10 @@
 <div class="container-fluid">
+    <div class="row form-row">
+        <div *ngIf="isFormError" class="alert alert-danger col-md-6 col-sm-11 col-11" role="alert">Either email or
+            password is incorrect</div>
+    </div>
     <div class="row mt-5 mb-3 form-row">
-        <form class="col-md-6 col-sm-11 col-11 form login-form" [formGroup]="loginForm">
+        <form class="col-md-6 col-sm-11 col-11 form" [ngClass]="{'login-form': !isFormError}" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div>
                 <label class="d-block form-label">Email Address</label>
                 <input class="form-control d-block form-field-input" type="email" placeholder="example@gmail.com"
