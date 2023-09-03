@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #e3f2fd;">
+<nav *ngIf="isAuthenticated()" class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #e3f2fd;">
     <div class="container-fluid">
         <a class="navbar-brand nav-log-text" href="#">Tour</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

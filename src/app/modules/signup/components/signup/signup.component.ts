@@ -50,14 +50,6 @@ export class SignupComponent implements OnInit {
     if(this.signupForm.invalid) {
       return;
     }
-    this.authService.signup(this.signupForm.value).subscribe({
-      next: (data) => {
-        console.log('Account created successfully');
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    })
-
+    this.authService.signup(this.signupForm.value)
   }
 }
