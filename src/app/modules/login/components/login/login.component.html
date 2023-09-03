@@ -11,8 +11,8 @@
                     formControlName="email" required>
             </div>
             <div *ngIf="f.email.errors">
-                <div *ngIf="f.email.errors.required && f.email.touched" class="text-danger">Email is required</div>
-                <div *ngIf="f.email.errors.email && f.email.touched" class="text-danger">Email must be
+                <div *ngIf="f.email.errors.required && f.email.touched" class="alert alert-danger">Email is required</div>
+                <div *ngIf="f.email.errors.email && f.email.touched" class="alert alert-danger">Email must be
                     a valid email
                     address</div>
             </div>
@@ -22,9 +22,9 @@
                     placeholder="Eample@123" required>
             </div>
             <div *ngIf="f.password.errors">
-                <div *ngIf="f.password.errors.required && f.password.touched" class="text-danger">Password is required
+                <div *ngIf="f.password.errors.required && f.password.touched" class="alert alert-danger">Password is required
                 </div>
-                <div *ngIf="f.password.errors.pattern && f.password.touched" class="text-danger">Password should
+                <div *ngIf="f.password.errors.pattern && f.password.touched" class="alert alert-danger">Password should
                     have minimum 8 characters and can have maximum 20 characters, at least 1 uppercase letter, 1
                     lowercase
                     letter and 1 number

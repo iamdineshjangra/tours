@@ -36,29 +36,35 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   signupPageValidation() {
-    this.signupForm = this.fb.group({
-      firstName: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(15),
+    this.signupForm = this.fb.group(
+      {
+        firstName: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(15),
+          ],
         ],
-      ],
-      lastName: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(15),
+        lastName: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(15),
+          ],
         ],
-      ],
-      email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [Validators.required, Validators.pattern(this.passwordRegExp)],
-      ],
-    });
+        email: ['', [Validators.required, Validators.email]],
+        password: [
+          '',
+          [Validators.required, Validators.pattern(this.passwordRegExp)],
+        ],
+        confirmPassword: [
+          '',
+          [Validators.required, Validators.pattern(this.passwordRegExp)],
+        ],
+      }
+    );
   }
 
   get f() {
@@ -74,32 +80,33 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   formErrorSubscribe() {
     this.isFromErrorSubscription = this.authService.isFromError.subscribe({
-       next: (data) => {
-         if(data) {
-           this.isFormError = data;
-           setTimeout(()=>{
-             this.isFormError = false;
-           },3000)
-         }
-       }
-     })
-   }
+      next: (data) => {
+        if (data) {
+          this.isFormError = data;
+          setTimeout(() => {
+            this.isFormError = false;
+          }, 3000);
+        }
+      },
+    });
+  }
 
-   emailErrorSubscribe() {
-    this.isDuplicateEmailSubscription = this.authService.isDuplicateEmail.subscribe({
-       next: (data) => {
-         if(data) {
-           this.isDuplicateEmail = data;
-           setTimeout(()=>{
-             this.isDuplicateEmail = false;
-           },3000)
-         }
-       }
-     })
-   }
- 
-   ngOnDestroy(): void {
-     this.isFromErrorSubscription.unsubscribe();
-     this.isDuplicateEmailSubscription.unsubscribe();
-   }
+  emailErrorSubscribe() {
+    this.isDuplicateEmailSubscription =
+      this.authService.isDuplicateEmail.subscribe({
+        next: (data) => {
+          if (data) {
+            this.isDuplicateEmail = data;
+            setTimeout(() => {
+              this.isDuplicateEmail = false;
+            }, 3000);
+          }
+        },
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.isFromErrorSubscription.unsubscribe();
+    this.isDuplicateEmailSubscription.unsubscribe();
+  }
 }
