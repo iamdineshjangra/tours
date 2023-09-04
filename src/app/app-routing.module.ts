@@ -20,6 +20,10 @@ const routes: Routes = [
   {
     path: 'api/v1/signup',
     loadChildren: () => import('../app/modules/signup/signup.module').then(m => m.SignupModule)
+  },
+  {
+    path: 'api/v1/forgetPassword',
+    loadChildren: () => import('../app/modules/forget-password/forget-password.module').then(m => m.ForgetPasswordModule)
   }
 ];
 

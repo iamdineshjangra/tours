@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { Signup, UserResponse, User, Login } from '../models/user';
+import { Signup, UserResponse, User, Login, ForgetPassword } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -53,6 +53,10 @@ export class AuthService {
           // console.log(err.error.errMessage);
         },
       });
+  }
+
+  forgetPassword(email: ForgetPassword) {
+    return this.http.post(`${this.apiUrl}/forgetPassword`, email)
   }
 
   logout() {
