@@ -8,31 +8,36 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./forget-password.component.scss']
 })
 export class ForgetPasswordComponent {
-  forgetPasswordSuccessMessage: string = '';
+  successMessage: string = '';
   errMessage: string = '';
   constructor(private authService: AuthService){}
 
 
   onSubmit(data: NgForm) {
+
     if(data && data.invalid) {
-      console.error('Form is invalid');
-      return;
+      this.errMessage = 'Please enter all required field with correct data.'
+      return this.removeErrorMessage()
     }
     const email = data.value;
     this.authService.forgetPassword(email).subscribe({
       next: (data) => {
-        this.forgetPasswordSuccessMessage = 'Please check your gmail to change password'
+        this.successMessage = data.message
         setTimeout(()=> {
-          this.forgetPasswordSuccessMessage = ''
+          this.successMessage = data.message
+          = ''
         },3000);
       },
       error: (err) => {
-        this.errMessage = 'Something went wrong. Please enter field with correct data.'
-        setTimeout(()=> {
-          this.errMessage = ''
-        },3000);
-        console.log(err.error.errMessage);
+        this.errMessage = err.error.errMessage;
+        return this.removeErrorMessage();
       }
     })
+  }
+
+  removeErrorMessage() {
+    setTimeout(() => {
+      this.errMessage = '';
+    }, 3000)
   }
 }

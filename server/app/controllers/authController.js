@@ -96,7 +96,8 @@ exports.forgetPassword = async (req, res) => {
     if (!user) {
       return responseUtils.sendErrorResponse(
         404,
-        "No user exists with provided email"
+        "No user exists with provided email",
+        res
       );
     }
     const resetToken = crypto.randomBytes(32).toString("hex");
@@ -107,6 +108,7 @@ exports.forgetPassword = async (req, res) => {
     await sendMailUtils.sendMail(user.email, user.id, user.resetToken);
     return res.status(200).json({
       status: "success",
+      message: "Please check your gmail to change password."
     });
   } catch (err) {
     return responseUtils.sendErrorResponse(

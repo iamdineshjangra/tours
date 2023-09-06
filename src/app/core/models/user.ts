@@ -30,7 +30,8 @@ export interface ForgetPassword {
 }
 
 export interface ForgetPasswordResponse {
-  status: string
+  status: string,
+  message: string
 }
 
 export interface ResetPassword {
