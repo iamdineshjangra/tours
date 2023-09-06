@@ -57,11 +57,11 @@ exports.login = async (req, res) => {
     }
     const user = await userService.getUserByEmail(email);
     if (!user) {
-      return responseUtils.sendErrorResponse(404, "User not found", res);
+      return responseUtils.sendErrorResponse(401, "Either email or password is incorrect", res);
     }
     const isCorrectPassword = await user.validatePassword(password);
     if (!isCorrectPassword) {
-      return responseUtils.sendErrorResponse(401, "Incorrect password", res);
+      return responseUtils.sendErrorResponse(401, "Either email or password is incorrect", res);
     }
     const token = authService.createJwtToken(user.id);
     return res.status(200).json({

@@ -1,6 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { Signup, UserResponse, User, Login, ForgetPassword, ForgetPasswordResponse, ResetPassword, ResetPasswordResponse } from '../models/user';
+import {
+  Signup,
+  UserResponse,
+  User,
+  Login,
+  ForgetPassword,
+  ForgetPasswordResponse,
+  ResetPassword,
+  ResetPasswordResponse,
+} from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -38,31 +47,25 @@ export class AuthService {
       });
   }
 
-  login(value: Login) {
-    return this.http
-      .post<UserResponse>(`${this.apiUrl}/login`, value)
-      .subscribe({
-        next: (data) => {
-          if (data && data.token) {
-            localStorage.setItem('token', data.token);
-            this.router.navigate(['api/v1/tours']);
-          }
-        },
-        error: (err) => {
-          this.isFromError.next(true);
-          // console.log(err.error.errMessage);
-        },
-      });
+  login(value: Login): Observable<UserResponse> {
+    return this.http.post<UserResponse>(`${this.apiUrl}/login`, value);
   }
 
   forgetPassword(email: ForgetPassword): Observable<ForgetPasswordResponse> {
-    return this.http.post<ForgetPasswordResponse>(`${this.apiUrl}/forgetPassword`, email);
+    return this.http.post<ForgetPasswordResponse>(
+      `${this.apiUrl}/forgetPassword`,
+      email
+    );
   }
 
-  resetPassword(userId: number, resetToken: string, password: string): Observable<ResetPasswordResponse> {
+  resetPassword(
+    userId: number,
+    resetToken: string,
+    password: string
+  ): Observable<ResetPasswordResponse> {
     return this.http.patch<ResetPasswordResponse>(
       `${this.apiUrl}/resetPassword?userId=${userId}&resetToken=${resetToken}`,
-      {password}
+      { password }
     );
   }
 

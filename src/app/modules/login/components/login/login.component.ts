@@ -9,10 +9,10 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit, OnDestroy{
+export class LoginComponent implements OnInit{
   loginForm: any = FormGroup;
-  isFormError: boolean = false;
-  private isFromErrorSubscription: any = Subscription;
+  errMessage: string = '';
+  successMessage: string = '';
   passwordRegExp: string =
     '^(?=.*[0-9])' +
     '(?=.*[a-z])(?=.*[A-Z])' +
@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.loginFormValidation();
-    this.formErrorSubscribe();
   }
 
   loginFormValidation() {
@@ -49,26 +48,31 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   onSubmit() {
     if (this.loginForm.invalid) {
-      return;
+      this.errMessage = 'Please enter all required field with correct data.'
+      return this.removeErrorMessage();
     }
-    this.authService.login(this.loginForm.value);
-  }
-
-  formErrorSubscribe() {
-   this.isFromErrorSubscription = this.authService.isFromError.subscribe({
+    this.authService.login(this.loginForm.value).subscribe({
       next: (data) => {
-        if(data) {
-          this.isFormError = data;
-          setTimeout(()=>{
-            this.isFormError = false;
-          },3000)
+        if (data) {
+          this.successMessage = 'Logged in successfully'
+          setTimeout(()=> {
+            this.successMessage = '';
+            localStorage.setItem('token', data.token);
+            this.router.navigate(['api/v1/tours']);
+          }, 3000)
         }
-      }
-    })
+      },
+      error: (err) => {
+        this.errMessage = err.error.errMessage;
+        return this.removeErrorMessage()
+      },
+    });
   }
 
-  ngOnDestroy(): void {
-    this.isFromErrorSubscription.unsubscribe();
+  removeErrorMessage() {
+    setTimeout(() => {
+      this.errMessage = '';
+    }, 3000)
   }
 
 }
