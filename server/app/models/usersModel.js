@@ -40,12 +40,6 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
     password: {
       type: Sequelize.STRING,
       allowNull: false,
-      validate: {
-        len: {
-          args: [8, 20],
-          msg: "Password length should be between 8 to 20 characters",
-        },
-      },
     },
     role: {
       type: Sequelize.ENUM("user", "organizer", "admin"),
@@ -64,7 +58,8 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       type: Sequelize.BIGINT,
     },
   });
-  User.beforeSave(hashPassword);
+  User.beforeCreate(hashPassword);
+  User.beforeUpdate(hashPassword);
   User.prototype.validatePassword = validatePassword;
   return User;
 };

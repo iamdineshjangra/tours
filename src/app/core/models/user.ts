@@ -28,3 +28,17 @@ export interface Login {
 export interface ForgetPassword {
   email: string;
 }
+
+export interface ForgetPasswordResponse {
+  status: string
+}
+
+export interface ResetPassword {
+  passwod: string;
+  confirmPassword: string
+}
+
+export interface ResetPasswordResponse {
+  status: string,
+  message: string
+}

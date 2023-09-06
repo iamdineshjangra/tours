@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { Signup, UserResponse, User, Login, ForgetPassword } from '../models/user';
+import { Signup, UserResponse, User, Login, ForgetPassword, ForgetPasswordResponse, ResetPassword, ResetPasswordResponse } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -56,7 +56,14 @@ export class AuthService {
   }
 
   forgetPassword(email: ForgetPassword) {
-    return this.http.post(`${this.apiUrl}/forgetPassword`, email)
+    return this.http.post(`${this.apiUrl}/forgetPassword`, email);
+  }
+
+  resetPassword(userId: number, resetToken: string, password: string): Observable<ResetPasswordResponse> {
+    return this.http.patch<ResetPasswordResponse>(
+      `${this.apiUrl}/resetPassword?userId=${userId}&resetToken=${resetToken}`,
+      {password}
+    );
   }
 
   logout() {

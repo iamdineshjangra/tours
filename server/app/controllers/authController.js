@@ -1,10 +1,10 @@
-const bycrpt = require('bcrypt');
-const crypto = require('crypto');
+const bycrpt = require("bcrypt");
+const crypto = require("crypto");
 const db = require("../models/index");
 const authService = require("../services/authService");
 const userService = require("../services/userService");
 const responseUtils = require("../utils/sendResponse");
-const utils = require('../utils/sendMail');
+const sendMailUtils = require("../utils/sendMail");
 
 exports.signup = async (req, res) => {
   try {
@@ -55,7 +55,7 @@ exports.login = async (req, res) => {
         res
       );
     }
-    const user = await userService.getUser(email);
+    const user = await userService.getUserByEmail(email);
     if (!user) {
       return responseUtils.sendErrorResponse(404, "User not found", res);
     }
@@ -84,32 +84,85 @@ exports.forgetPassword = async (req, res) => {
     const email = req.body.email;
 
     if (!email) {
-      responseUtils.sendErrorResponse(
+      return responseUtils.sendErrorResponse(
         400,
         "Please enter a email to change password",
         res
       );
     }
 
-    const user = await userService.getUser(email);
+    const user = await userService.getUserByEmail(email);
 
-    if(!user) {
-      responseUtils.sendErrorResponse(404, 'No user exists with provided email');
+    if (!user) {
+      return responseUtils.sendErrorResponse(
+        404,
+        "No user exists with provided email"
+      );
     }
     const resetToken = crypto.randomBytes(32).toString("hex");
     const hashToken = await bycrpt.hash(resetToken, 10);
     user.resetToken = hashToken;
     user.resetTokenValidTime = Date.now() + 10 * 60 * 1000 + 10000;
     await user.save();
-    await utils.sendMail(user.email, user.resetToken);
-    res.status(200).json({
-      status: 'success',
-    })
+    await sendMailUtils.sendMail(user.email, user.id, user.resetToken);
+    return res.status(200).json({
+      status: "success",
+    });
   } catch (err) {
-    responseUtils.sendErrorResponse(
+    return responseUtils.sendErrorResponse(
       500,
       "Error while changing user password",
       res
     );
+  }
+};
+
+exports.resetPassword = async (req, res) => {
+  try {
+    let { resetToken, userId } = req.query;
+    const {password} = req.body;
+
+    if (!resetToken || !userId) {
+      return responseUtils.sendErrorResponse(
+        400,
+        "Reset token and user id both should present in req",
+        res
+      );
+    }
+
+    if(!password) {
+      return responseUtils.sendErrorResponse(400, 'Please enter the password to change the password', res)
+    }
+
+    userId = parseInt(userId);
+    const user = await userService.getUserById(userId);
+
+    if(!user) {
+      return responseUtils.sendErrorResponse(404, 'User not found', res);
+    }
+
+    const isValidResetToken = resetToken.trim() === user.resetToken.trim();
+
+    if(!isValidResetToken) {
+      return responseUtils.sendErrorResponse(400, 'Invalid reset token.', res);
+    }
+
+    const isTimeRemainingToChangePassword = user.resetTokenValidTime > Date.now();
+
+    if(!isTimeRemainingToChangePassword) {
+      return responseUtils.sendErrorResponse(400, 'Reset token has been expired', res);
+    }
+    user.resetToken = null;
+    user.resetTokenValidTime = null;
+    user.password = password;
+    await user.save();
+    return res.status(200).json({
+      status: 'success',
+      message: 'Password is updated successfully'
+    })
+
+  } catch (err) {
+    console.log(err);
+    return responseUtils.sendErrorResponse(500, "Error while reseting password", res);
   }
 };
