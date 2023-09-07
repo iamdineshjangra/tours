@@ -6,6 +6,7 @@ const passwordRegExp =
   "(?=.*[a-z])(?=.*[A-Z])" +
   "(?=.*[@#$%^&+=])" +
   "(?=\\S+$).{8,20}$";
+
 exports.loginFormValidation = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -52,6 +53,7 @@ exports.loginFormValidation = async (req, res, next) => {
 
     next();
   } catch (err) {
+    console.log(err);
     return responseUtils.sendErrorResponse(
       500,
       "Error while login the user",
