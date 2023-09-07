@@ -10,8 +10,7 @@
         <form class="col-md-6 col-sm-11 col-11 form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <div>
                 <label class="d-block form-label">First Name</label>
-                <input class="form-control d-block form-field-input" type="text" placeholder="Dinesh"
-                    formControlName="firstName" required>
+                <input class="form-control d-block form-field-input" type="text" formControlName="firstName" required>
             </div>
             <div *ngIf="f.firstName.errors">
                 <div *ngIf="f.firstName.errors.required && f.firstName.touched" class="alert alert-danger">First Name is
@@ -25,8 +24,7 @@
             </div>
             <div>
                 <label class="d-block form-label">Last Name</label>
-                <input class="form-control d-block form-field-input" type="text" placeholder="Jangra"
-                    formControlName="lastName" required>
+                <input class="form-control d-block form-field-input" type="text" formControlName="lastName" required>
             </div>
             <div *ngIf="f.lastName.errors">
                 <div *ngIf="f.lastName.errors.required && f.lastName.touched" class="alert alert-danger">Last Name is
@@ -41,8 +39,7 @@
             </div>
             <div>
                 <label class="d-block form-label">Email Address</label>
-                <input class="form-control d-block form-field-input" type="email" placeholder="example@gmail.com"
-                    formControlName="email" required>
+                <input class="form-control d-block form-field-input" type="email" formControlName="email" required>
             </div>
             <div *ngIf="f.email.errors">
                 <div *ngIf="f.email.errors.required && f.email.touched" class="alert alert-danger">Email is required
@@ -54,7 +51,7 @@
             <div>
                 <label class="d-block form-label">Password</label>
                 <input class="form-control d-block form-field-input" type="password" formControlName="password"
-                    placeholder="Eample@123" required>
+                    required>
             </div>
             <div *ngIf="f.password.errors">
                 <div *ngIf="f.password.errors.required && f.password.touched" class="alert alert-danger">Password is
@@ -69,7 +66,7 @@
             <div>
                 <label class="d-block form-label">Confirm Password</label>
                 <input class="form-control d-block form-field-input" type="password" formControlName="confirmPassword"
-                    placeholder="Eample@123" [appConfirmPassword]="'password'" required>
+                    [appConfirmPassword]="'password'" required>
             </div>
             <div *ngIf="f.confirmPassword.errors">
                 <div *ngIf="f.confirmPassword.errors.required && f.confirmPassword.touched" class="alert alert-danger">
