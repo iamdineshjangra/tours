@@ -8,12 +8,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
 })
-export class SignupComponent implements OnInit, OnDestroy {
+export class SignupComponent implements OnInit {
   signupForm: any = FormGroup;
-  isFormError: boolean = false;
-  isDuplicateEmail: boolean = false;
-  private isFromErrorSubscription: any = Subscription;
-  private isDuplicateEmailSubscription: any = Subscription;
+  errMessage: string = '';
+  successMessage: string = '';
   passwordRegExp: string =
     '^(?=.*[0-9])' +
     '(?=.*[a-z])(?=.*[A-Z])' +
@@ -31,8 +29,6 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.signupPageValidation();
-    this.formErrorSubscribe();
-    this.emailErrorSubscribe();
   }
 
   signupPageValidation() {
@@ -73,40 +69,30 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.signupForm.invalid) {
-      return;
+      this.errMessage = 'Please enter all required field with correct data.'
+      return this.removeErrorMessage();
     }
-    this.authService.signup(this.signupForm.value);
-  }
-
-  formErrorSubscribe() {
-    this.isFromErrorSubscription = this.authService.isFromError.subscribe({
+    this.authService.signup(this.signupForm.value).subscribe({
       next: (data) => {
         if (data) {
-          this.isFormError = data;
-          setTimeout(() => {
-            this.isFormError = false;
-          }, 3000);
+          this.successMessage = 'Signup successfully'
+          setTimeout(()=>{
+            this.successMessage = '';
+            localStorage.setItem('token', data.token);
+            this.router.navigate(['api/v1/tours']);
+          },3000)
         }
+      },
+      error: (err) => {
+        this.errMessage = err.error.errMessage;
+        return this.removeErrorMessage();
       },
     });
   }
 
-  emailErrorSubscribe() {
-    this.isDuplicateEmailSubscription =
-      this.authService.isDuplicateEmail.subscribe({
-        next: (data) => {
-          if (data) {
-            this.isDuplicateEmail = data;
-            setTimeout(() => {
-              this.isDuplicateEmail = false;
-            }, 3000);
-          }
-        },
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.isFromErrorSubscription.unsubscribe();
-    this.isDuplicateEmailSubscription.unsubscribe();
+  removeErrorMessage() {
+    setTimeout(() => {
+      this.errMessage = '';
+    }, 3000)
   }
 }

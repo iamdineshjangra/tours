@@ -24,7 +24,11 @@ export class ResetPasswordComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService
-  ) {}
+  ) {
+    if(this.authService.isAuthenticated()) {
+      this.router.navigate(['api/v1/tours']);
+    }
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {

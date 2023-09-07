@@ -32,15 +32,17 @@ exports.signup = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    let modelError = false;
     if (err && err.name === "SequelizeUniqueConstraintError") {
-      modelError = true;
+      return responseUtils.sendErrorResponse(
+        500,
+        "This email is not available",
+        res
+      );
     }
     return responseUtils.sendErrorResponse(
       500,
       "Error while creating user",
-      res,
-      modelError
+      res
     );
   }
 };
@@ -57,11 +59,19 @@ exports.login = async (req, res) => {
     }
     const user = await userService.getUserByEmail(email);
     if (!user) {
-      return responseUtils.sendErrorResponse(401, "Either email or password is incorrect", res);
+      return responseUtils.sendErrorResponse(
+        401,
+        "Either email or password is incorrect",
+        res
+      );
     }
     const isCorrectPassword = await user.validatePassword(password);
     if (!isCorrectPassword) {
-      return responseUtils.sendErrorResponse(401, "Either email or password is incorrect", res);
+      return responseUtils.sendErrorResponse(
+        401,
+        "Either email or password is incorrect",
+        res
+      );
     }
     const token = authService.createJwtToken(user.id);
     return res.status(200).json({
@@ -108,7 +118,7 @@ exports.forgetPassword = async (req, res) => {
     await sendMailUtils.sendMail(user.email, user.id, user.resetToken);
     return res.status(200).json({
       status: "success",
-      message: "Please check your gmail to change password."
+      message: "Please check your gmail to change password.",
     });
   } catch (err) {
     return responseUtils.sendErrorResponse(
@@ -122,7 +132,7 @@ exports.forgetPassword = async (req, res) => {
 exports.resetPassword = async (req, res) => {
   try {
     let { resetToken, userId } = req.query;
-    const {password} = req.body;
+    const { password } = req.body;
 
     if (!resetToken || !userId) {
       return responseUtils.sendErrorResponse(
@@ -132,39 +142,51 @@ exports.resetPassword = async (req, res) => {
       );
     }
 
-    if(!password) {
-      return responseUtils.sendErrorResponse(400, 'Please enter the password to change the password', res)
+    if (!password) {
+      return responseUtils.sendErrorResponse(
+        400,
+        "Please enter the password to change the password",
+        res
+      );
     }
 
     userId = parseInt(userId);
     const user = await userService.getUserById(userId);
 
-    if(!user) {
-      return responseUtils.sendErrorResponse(404, 'User not found', res);
+    if (!user) {
+      return responseUtils.sendErrorResponse(404, "User not found", res);
     }
 
     const isValidResetToken = resetToken.trim() === user.resetToken.trim();
 
-    if(!isValidResetToken) {
-      return responseUtils.sendErrorResponse(400, 'Invalid reset token.', res);
+    if (!isValidResetToken) {
+      return responseUtils.sendErrorResponse(400, "Invalid reset token.", res);
     }
 
-    const isTimeRemainingToChangePassword = user.resetTokenValidTime > Date.now();
+    const isTimeRemainingToChangePassword =
+      user.resetTokenValidTime > Date.now();
 
-    if(!isTimeRemainingToChangePassword) {
-      return responseUtils.sendErrorResponse(400, 'Reset token has been expired', res);
+    if (!isTimeRemainingToChangePassword) {
+      return responseUtils.sendErrorResponse(
+        400,
+        "Reset token has been expired",
+        res
+      );
     }
     user.resetToken = null;
     user.resetTokenValidTime = null;
     user.password = password;
     await user.save();
     return res.status(200).json({
-      status: 'success',
-      message: 'Password is updated successfully'
-    })
-
+      status: "success",
+      message: "Password is updated successfully",
+    });
   } catch (err) {
     console.log(err);
-    return responseUtils.sendErrorResponse(500, "Error while reseting password", res);
+    return responseUtils.sendErrorResponse(
+      500,
+      "Error while reseting password",
+      res
+    );
   }
 };

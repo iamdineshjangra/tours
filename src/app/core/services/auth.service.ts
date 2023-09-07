@@ -18,33 +18,14 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   apiUrl = 'http://localhost:4100/api/v1';
-  isFromError = new Subject<boolean>();
-  isDuplicateEmail = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient, private router: Router) {}
 
   isAuthenticated() {
     return localStorage.getItem('token');
   }
 
-  signup(value: Signup) {
-    return this.http
-      .post<UserResponse>(`${this.apiUrl}/signup`, value)
-      .subscribe({
-        next: (data) => {
-          if (data && data.token) {
-            localStorage.setItem('token', data.token);
-            this.router.navigate(['api/v1/tours']);
-          }
-        },
-
-        error: (err) => {
-          console.log(err.error.errMessage);
-          if (err.error.isModelError) {
-            return this.isDuplicateEmail.next(true);
-          }
-          this.isFromError.next(true);
-        },
-      });
+  signup(value: Signup): Observable<UserResponse> {
+    return this.http.post<UserResponse>(`${this.apiUrl}/signup`, value);
   }
 
   login(value: Login): Observable<UserResponse> {

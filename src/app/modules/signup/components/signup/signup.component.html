@@ -1,12 +1,10 @@
 <div class="container-fluid ">
     <div class="row form-row">
-        <div *ngIf="isFormError && !isDuplicateEmail" class="alert alert-danger col-md-6 col-sm-11 col-11" role="alert">
-            Please enter all
-            fields with correct data</div>
+        <div *ngIf="errMessage" class="alert alert-danger col-md-6 col-sm-11 col-11" role="alert">{{errMessage}}</div>
     </div>
     <div class="row form-row">
-        <div *ngIf="isDuplicateEmail" class="alert alert-danger col-md-6 col-sm-11 col-11" role="alert">This email is
-            not available</div>
+        <div *ngIf="successMessage" class="alert alert-danger col-md-6 col-sm-11 col-11" role="alert">{{successMessage}}
+        </div>
     </div>
     <div class="row mt-5 form-row">
         <form class="col-md-6 col-sm-11 col-11 form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
