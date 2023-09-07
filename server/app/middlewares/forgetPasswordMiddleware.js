@@ -23,7 +23,7 @@ exports.forgetPasswordFormValidation = async (req, res, next) => {
     if (!validator.validate(email)) {
       return responseUtils.sendErrorResponse(
         400,
-        "Email should be type email",
+        "Email should be of type email",
         res
       );
     }

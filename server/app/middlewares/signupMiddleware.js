@@ -15,7 +15,7 @@ exports.signupFormValidation = async (req, res, next) => {
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
       return responseUtils.sendErrorResponse(
         400,
-        "Please enter all required field",
+        "Please enter all required fields",
         res
       );
     }
@@ -63,7 +63,7 @@ exports.signupFormValidation = async (req, res, next) => {
     if (!validator.validate(email)) {
       return responseUtils.sendErrorResponse(
         400,
-        "Email should be type email",
+        "Email should be of type email",
         res
       );
     }

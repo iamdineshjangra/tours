@@ -14,39 +14,39 @@ exports.loginFormValidation = async (req, res, next) => {
     if (!email || !password) {
       return responseUtils.sendErrorResponse(
         400,
-        "Please enter required fields",
+        "Please enter all required fields",
         res
       );
     }
 
     if (/\s/.test(email)) {
       return responseUtils.sendErrorResponse(
-        400,
-        "White space is not allowed in email input field",
+        401,
+        "Either email or password is invalid",
         res
       );
     }
 
     if (/\s/.test(password)) {
       return responseUtils.sendErrorResponse(
-        400,
-        "White space is not allowed in password input field",
+        401,
+        "Either email or password is invalid",
         res
       );
     }
 
     if (!validator.validate(email)) {
       return responseUtils.sendErrorResponse(
-        400,
-        "Email should be type email",
+        401,
+        "Either email or password is invalid",
         res
       );
     }
 
     if (!password.match(passwordRegExp)) {
       return responseUtils.sendErrorResponse(
-        400,
-        "Password should have minimum 8 characters and can have maximum 20 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number",
+        401,
+        "Either email or password is invalid",
         res
       );
     }
