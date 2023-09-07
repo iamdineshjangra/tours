@@ -4,6 +4,7 @@ const authController = require("../controllers/authController");
 const loginMiddleware = require("../middlewares/loginMiddleware");
 const signupMiddleware = require("../middlewares/signupMiddleware");
 const forgetPasswordMiddleware = require("../middlewares/forgetPasswordMiddleware");
+const resetPasswordMiddleware = require("../middlewares/resetPasswordMiddleware");
 
 router
   .route("/signup")
@@ -17,6 +18,11 @@ router
     forgetPasswordMiddleware.forgetPasswordFormValidation,
     authController.forgetPassword
   );
-router.route("/resetPassword").patch(authController.resetPassword);
+router
+  .route("/resetPassword")
+  .patch(
+    resetPasswordMiddleware.resetPasswordFormValidation,
+    authController.resetPassword
+  );
 
 module.exports = router;

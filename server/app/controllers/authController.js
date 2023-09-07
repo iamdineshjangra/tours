@@ -103,22 +103,6 @@ exports.resetPassword = async (req, res) => {
     let { resetToken, userId } = req.query;
     const { password } = req.body;
 
-    if (!resetToken || !userId) {
-      return responseUtils.sendErrorResponse(
-        400,
-        "Reset token and user id both should present in req",
-        res
-      );
-    }
-
-    if (!password) {
-      return responseUtils.sendErrorResponse(
-        400,
-        "Please enter the password to change the password",
-        res
-      );
-    }
-
     userId = parseInt(userId);
     const user = await userService.getUserById(userId);
 
@@ -126,7 +110,7 @@ exports.resetPassword = async (req, res) => {
       return responseUtils.sendErrorResponse(404, "User not found", res);
     }
 
-    const isValidResetToken = resetToken.trim() === user.resetToken.trim();
+    const isValidResetToken = resetToken === user.resetToken;
 
     if (!isValidResetToken) {
       return responseUtils.sendErrorResponse(400, "Invalid reset token.", res);

@@ -33,7 +33,7 @@ exports.forgetPasswordFormValidation = async (req, res, next) => {
     console.log(err);
     return responseUtils.sendErrorResponse(
       500,
-      "Error while forgeting the user",
+      "Error while forgeting the password",
       res
     );
   }
