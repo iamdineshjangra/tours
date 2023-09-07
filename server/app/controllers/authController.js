@@ -50,13 +50,6 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    if (!email || !password) {
-      return responseUtils.sendErrorResponse(
-        400,
-        "Please enter required fields",
-        res
-      );
-    }
     const user = await userService.getUserByEmail(email);
     if (!user) {
       return responseUtils.sendErrorResponse(
