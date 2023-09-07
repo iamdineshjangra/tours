@@ -28,6 +28,10 @@ const routes: Routes = [
   {
     path: 'api/v1/resetPassword',
     loadChildren: () => import('../app/modules/reset-password/reset-password.module').then(m => m.ResetPasswordModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'api/v1/tours',
   }
 ];
 
