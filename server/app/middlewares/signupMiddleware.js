@@ -100,6 +100,13 @@ exports.signupFormValidation = async (req, res, next) => {
       );
     }
     delete req.body.confirmPassword;
+    if (Object.keys(req.body).length > 4) {
+      return responseUtils.sendErrorResponse(
+        400,
+        "You entered some extra fields which causing issue while signup",
+        res
+      );
+    }
     next();
   } catch (err) {
     console.log(err);

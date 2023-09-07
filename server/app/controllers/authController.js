@@ -8,21 +8,6 @@ const sendMailUtils = require("../utils/sendMail");
 
 exports.signup = async (req, res) => {
   try {
-    const { firstName, lastName, role, email, password } = req.body;
-    if (!firstName || !lastName || !email || !password) {
-      return responseUtils.sendErrorResponse(
-        400,
-        "Please enter all required field",
-        res
-      );
-    }
-    if (role) {
-      return responseUtils.sendErrorResponse(
-        400,
-        "This api is not to add role. Please do a hit to other api to achieve this.",
-        res
-      );
-    }
     const user = await authService.signup(req.body);
     const token = authService.createJwtToken(user.id);
     return res.status(201).json({
@@ -85,15 +70,6 @@ exports.login = async (req, res) => {
 exports.forgetPassword = async (req, res) => {
   try {
     const email = req.body.email;
-
-    if (!email) {
-      return responseUtils.sendErrorResponse(
-        400,
-        "Please enter a email to change password",
-        res
-      );
-    }
-
     const user = await userService.getUserByEmail(email);
 
     if (!user) {
