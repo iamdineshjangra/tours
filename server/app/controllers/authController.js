@@ -9,7 +9,7 @@ const sendMailUtils = require("../utils/sendMail");
 exports.signup = async (req, res) => {
   try {
     const user = await authService.signup(req.body);
-    const token = authService.createJwtToken(user.id);
+    const token = await authService.createJwtToken(user.id);
     return res.status(201).json({
       status: "success",
       user: user,
@@ -51,7 +51,7 @@ exports.login = async (req, res) => {
         res
       );
     }
-    const token = authService.createJwtToken(user.id);
+    const token = await authService.createJwtToken(user.id);
     return res.status(200).json({
       status: "success",
       user: user,
