@@ -15,6 +15,7 @@ export const toursResolver: ResolveFn<any> = (
 ): Observable<ToursResponse> => {
   return tourService.getAllTours().pipe(
     catchError((error: any) => {
+      console.log(error);
       return of(error);
     })
   )
