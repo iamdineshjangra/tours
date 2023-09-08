@@ -143,3 +143,48 @@ exports.resetPassword = async (req, res) => {
     );
   }
 };
+
+exports.protector = async (req, res, next) => {
+  try {
+    let token;
+    if (
+      req.headers &&
+      req.headers["authorization"] &&
+      req.headers["authorization"].startsWith("Bearer")
+    ) {
+
+      token = req.headers["authorization"].split(" ")[1];
+      if(!token) {
+        return responseUtils.sendErrorResponse(
+          401,
+          "Token is not present in req",
+          res
+        );
+      }
+      
+      const decrypted = await authService.verifyToken(token, process.env.JWT_SECRET_KEY);
+      const user = await userService.getUserById(decrypted.id);
+
+      // if user get deleted after token issued
+
+      if(!user) {
+        return responseUtils.sendErrorResponse(401, "Invaild token", res)
+      }
+
+      next();
+    } else {
+      return responseUtils.sendErrorResponse(
+        401,
+        "Token is not present in req",
+        res
+      );
+    }
+  } catch (err) {
+    console.log(err);
+    return responseUtils.sendErrorResponse(
+      500,
+      "Something went wrong while verifying token.",
+      res
+    );
+  }
+};

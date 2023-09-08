@@ -1,5 +1,6 @@
 const db = require("../models/index");
 const jwt = require("jsonwebtoken");
+const util = require('util');
 
 exports.signup = async (userData) => {
   return await db.User.create(userData);
@@ -10,3 +11,7 @@ exports.createJwtToken = (userId) => {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
+
+exports.verifyToken = async (token, secret) => {
+  return await util.promisify(jwt.verify)(token, secret);
+}
