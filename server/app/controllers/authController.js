@@ -214,6 +214,7 @@ exports.authorization = async (req, res, next) => {
     }
     next();
   } catch (err) {
+    console.log(err);
     return responseUtils.sendErrorResponse(500, "Error while authorizing user", res);
   }
 };

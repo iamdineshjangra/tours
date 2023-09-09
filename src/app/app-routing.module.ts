@@ -30,6 +30,11 @@ const routes: Routes = [
     loadChildren: () => import('../app/modules/reset-password/reset-password.module').then(m => m.ResetPasswordModule)
   },
   {
+    path: 'api/v1/users/me',
+    canActivate: [authGuard],
+    loadChildren: () => import('../app/modules/user/user.module').then(m => m.UserModule)
+  },
+  {
     path: '**',
     redirectTo: 'api/v1/tours',
   }

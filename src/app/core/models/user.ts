@@ -13,6 +13,11 @@ export interface UserResponse {
   user: User;
 }
 
+export interface MeResponse {
+  status: string;
+  user: User
+}
+
 export interface Signup {
   firstName: string;
   lastName: string;

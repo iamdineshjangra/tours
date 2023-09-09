@@ -16,10 +16,10 @@
     </div>
 </div>
 
-<div *ngIf="tours && tours.length === 0 && !errMessage" class="show-user-error-or-not-found">
+<div *ngIf="tours && tours.length === 0 && !errMessage" class="err-message">
     <h1>No Tour Available...</h1>
 </div>
 
-<div *ngIf="errMessage" class="show-user-error-or-not-found">
+<div *ngIf="errMessage" class="err-message">
     <h1>{{errMessage}}</h1>
 </div>

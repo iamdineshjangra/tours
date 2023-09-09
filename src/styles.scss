@@ -45,3 +45,28 @@ body {
     }
   }
 }
+
+.card-details {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card-img-top {
+  height: 40vh;
+}
+
+@media only screen and (max-width: 692px) {
+  .card-details {
+      width:90%
+  }
+}
+
+.err-message {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 40vh;
+}

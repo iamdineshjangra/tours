@@ -1,4 +1,4 @@
-<div *ngIf="tour" class="card mb-5 mt-5 mx-auto tour-details-card">
+<div *ngIf="tour" class="card mb-5 mt-5 mx-auto card-details">
   <img class="card-img-top" [src]="tour.image" alt="Card image cap">
   <div class="card-body">
     <h1 class="card-title">Title: {{tour.title}}</h1>
@@ -11,5 +11,5 @@
 </div>
 
 <div *ngIf="errMessage">
-  <h1 class="show-user-error-or-not-found">{{errMessage}}</h1>
+  <h1 class="err-message">{{errMessage}}</h1>
 </div>

@@ -1,0 +1,12 @@
+<div *ngIf="user" class="card mb-5 mt-5 mx-auto card-details">
+    <img class="card-img-top" src="assets/images/avatar.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h1 class="card-title">Name: {{user.firstName}} {{user.lastName}}</h1>
+      <p class="card-text">Email: {{user.email}}</p>
+      <p class="card-text">Role: {{user.role}}</p>
+    </div>
+  </div>
+  
+  <div *ngIf="errMessage">
+    <h1 class="err-message">{{errMessage}}</h1>
+  </div>
