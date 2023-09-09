@@ -152,24 +152,28 @@ exports.protector = async (req, res, next) => {
       req.headers["authorization"] &&
       req.headers["authorization"].startsWith("Bearer")
     ) {
-
       token = req.headers["authorization"].split(" ")[1];
-      if(!token) {
+      if (!token) {
         return responseUtils.sendErrorResponse(
           401,
           "Token is not present in req",
           res
         );
       }
-      
-      const decrypted = await authService.verifyToken(token, process.env.JWT_SECRET_KEY);
+
+      const decrypted = await authService.verifyToken(
+        token,
+        process.env.JWT_SECRET_KEY
+      );
       const user = await userService.getUserById(decrypted.id);
 
       // if user get deleted after token issued
 
-      if(!user) {
-        return responseUtils.sendErrorResponse(401, "Invaild token", res)
+      if (!user) {
+        return responseUtils.sendErrorResponse(401, "Invaild token", res);
       }
+
+      req.user = user;
 
       next();
     } else {
@@ -181,10 +185,10 @@ exports.protector = async (req, res, next) => {
     }
   } catch (err) {
     console.log(err);
-    if(err.name === "TokenExpiredError") {
-      return responseUtils.sendErrorResponse(401, "Token get expire", res)
+    if (err.name === "TokenExpiredError") {
+      return responseUtils.sendErrorResponse(401, "Token get expire", res);
     }
-    if(err.message === "invalid token") {
+    if (err.message === "invalid token") {
       return responseUtils.sendErrorResponse(401, "Invalid token", res);
     }
     return responseUtils.sendErrorResponse(
@@ -192,5 +196,24 @@ exports.protector = async (req, res, next) => {
       "Something went wrong while verifying token.",
       res
     );
+  }
+};
+
+exports.authorization = async (req, res, next) => {
+  try {
+    if (!req.user) {
+      return responseUtils.sendErrorResponse(401, "You are not logged in", res);
+    }
+
+    if (req.user.role === "user") {
+      return responseUtils.sendErrorResponse(
+        403,
+        "You do not have enough role to access this",
+        res
+      );
+    }
+    next();
+  } catch (err) {
+    return responseUtils.sendErrorResponse(500, "Error while authorizing user", res);
   }
 };
