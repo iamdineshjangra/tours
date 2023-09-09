@@ -181,6 +181,12 @@ exports.protector = async (req, res, next) => {
     }
   } catch (err) {
     console.log(err);
+    if(err.name === "TokenExpiredError") {
+      return responseUtils.sendErrorResponse(401, "Token get expire", res)
+    }
+    if(err.message === "invalid token") {
+      return responseUtils.sendErrorResponse(401, "Invalid token", res);
+    }
     return responseUtils.sendErrorResponse(
       500,
       "Something went wrong while verifying token.",
