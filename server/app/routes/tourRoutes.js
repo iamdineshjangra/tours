@@ -7,7 +7,7 @@ router
   .route("/")
   .post(
     authController.protector,
-    authController.authorization,
+    authController.authorization("admin", "organizer"),
     tourController.createTour
   )
   .get(authController.protector, tourController.getTours);

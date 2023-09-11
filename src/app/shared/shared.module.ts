@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { ConfirmPasswordDirective } from './directives/confirm-password.directive';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     SpinnerComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [HeaderComponent, ConfirmPasswordDirective]
 })

@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService) {
     this.isAuthenticated();
   }
 
@@ -21,9 +21,5 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-  }
-
-  me() {
-    return this.router.navigate(['api/v1/users/me'])
   }
 }

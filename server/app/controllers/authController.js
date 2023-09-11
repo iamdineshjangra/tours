@@ -199,22 +199,24 @@ exports.protector = async (req, res, next) => {
   }
 };
 
-exports.authorization = async (req, res, next) => {
-  try {
-    if (!req.user) {
-      return responseUtils.sendErrorResponse(401, "You are not logged in", res);
+exports.authorization =  (...roles) => {
+  return async (req, res, next) => {
+    try {
+      if (!req.user) {
+        return responseUtils.sendErrorResponse(401, "You are not logged in", res);
+      }
+  
+      if (!roles.includes(req.user.role)) {
+        return responseUtils.sendErrorResponse(
+          403,
+          "You do not have enough roles to access this",
+          res
+        );
+      }
+      next();
+    } catch (err) {
+      console.log(err);
+      return responseUtils.sendErrorResponse(500, "Error while authorizing user", res);
     }
-
-    if (req.user.role === "user") {
-      return responseUtils.sendErrorResponse(
-        403,
-        "You do not have enough role to access this",
-        res
-      );
-    }
-    next();
-  } catch (err) {
-    console.log(err);
-    return responseUtils.sendErrorResponse(500, "Error while authorizing user", res);
   }
 };
