@@ -52,6 +52,6 @@ export class AuthService {
 
   logout() {
     localStorage.clear();
-    this.router.navigate(['api/v1/login']);
+    this.router.navigate(['login']);
   }
 }

@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
     private router: Router
   ) {
     if (this.authService.isAuthenticated()) {
-      this.router.navigate(['api/v1/tours']);
+      this.router.navigate(['tours']);
     }
   }
 
@@ -79,7 +79,7 @@ export class SignupComponent implements OnInit {
           setTimeout(()=>{
             this.successMessage = '';
             localStorage.setItem('token', data.token);
-            this.router.navigate(['api/v1/tours']);
+            this.router.navigate(['tours']);
           },3000)
         }
       },

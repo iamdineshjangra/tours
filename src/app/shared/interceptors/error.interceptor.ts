@@ -19,7 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         if (err && err.status === 401) {
           localStorage.clear();
-          this.router.navigate(['api/v1/login']);
+          this.router.navigate(['login']);
         }
         return throwError(() => err);
       })

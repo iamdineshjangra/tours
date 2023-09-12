@@ -51,6 +51,6 @@ export class ToursComponent implements OnInit {
   }
 
   goToTourDetailsPage(tourId: number) {
-    return this.router.navigate(['api/v1/tours', tourId]);
+    return this.router.navigate(['tours', tourId]);
   }
 }

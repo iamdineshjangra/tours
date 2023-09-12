@@ -26,7 +26,7 @@ export class ResetPasswordComponent implements OnInit {
     private authService: AuthService
   ) {
     if(this.authService.isAuthenticated()) {
-      this.router.navigate(['api/v1/tours']);
+      this.router.navigate(['tours']);
     }
   }
 
@@ -80,7 +80,7 @@ export class ResetPasswordComponent implements OnInit {
           this.successMessage = data.message
           setTimeout(()=> {
             this.successMessage = ''
-            this.router.navigate(['api/v1/login']);
+            this.router.navigate(['login']);
           }, 3000)
         }
       },

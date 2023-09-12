@@ -26,6 +26,9 @@ export class TourDetailsComponent {
       next: (data) => {
         if (data && data['tour'] && data['tour'].tour) {
           const tour = data['tour'].tour;
+          let dateFormat = 'YYYY-DD-MM HH:mm:ss';
+          tour.startDate = moment.utc(tour.startDate).local().format(dateFormat);
+          tour.endDate = moment.utc(tour.endDate).local().format(dateFormat);
           this.tour = tour;
         }
         if (
@@ -51,7 +54,7 @@ export class TourDetailsComponent {
         this.successMessage = 'Tour deleted successfully.';
         setTimeout(()=> {
           this.successMessage = ''
-          this.router.navigate(['api/v1/tours']);
+          this.router.navigate(['tours']);
         }, 3000)
       },
       error: (err) => {

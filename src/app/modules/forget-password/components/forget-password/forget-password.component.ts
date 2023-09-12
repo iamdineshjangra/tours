@@ -13,7 +13,7 @@ export class ForgetPasswordComponent {
   errMessage: string = '';
   constructor(private authService: AuthService, private router: Router) {
     if (this.authService.isAuthenticated()) {
-      this.router.navigate(['api/v1/tours']);
+      this.router.navigate(['tours']);
     }
   }
 
