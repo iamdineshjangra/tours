@@ -35,11 +35,12 @@ export class TourDetailsComponent {
           data['tour'].error.errMessage
         ) {
           this.errMessage = data['tour'].error.errMessage;
+          this.removeErrorMessage()
         }
       },
       error: (err) => {
         this.errMessage = err.error.errMessage;
-        console.log(err.error.errMessage);
+        this.removeErrorMessage()
       },
     });
   }
@@ -49,12 +50,20 @@ export class TourDetailsComponent {
       next: (data) => {
         this.successMessage = 'Tour deleted successfully.';
         setTimeout(()=> {
+          this.successMessage = ''
           this.router.navigate(['api/v1/tours']);
         }, 3000)
       },
       error: (err) => {
         this.errMessage = err.error.errMessage;
+        this.removeErrorMessage();
       },
     });
+  }
+
+  removeErrorMessage() {
+    setTimeout(() => {
+      this.errMessage = '';
+    }, 3000)
   }
 }
