@@ -11,3 +11,7 @@ exports.getTour = async (tourId) => {
 exports.createTour = async(tourData) => {
     return await db.Tour.create(tourData);
 }
+
+exports.deleteTour = async(tourId) => {
+    return await db.Tour.destroy({where: {id: tourId}});;
+}

@@ -1,5 +1,6 @@
 const tourService = require("../services/tourService");
 const responseUtils = require("../utils/sendResponse");
+
 exports.getTours = async (req, res) => {
   try {
     const tours = await tourService.getTours();
@@ -57,6 +58,31 @@ exports.getTour = async (req, res) => {
     return responseUtils.sendErrorResponse(
       500,
       "Error while finding tour",
+      res
+    );
+  }
+};
+
+exports.deleteTour = async (req, res) => {
+  try {
+    const tourId = req.params.tourId;
+    if (!tourId) {
+      return responseUtils.sendErrorResponse(
+        400,
+        "Tour id is not present in req",
+        res
+      );
+    }
+    await tourService.deleteTour(tourId);
+    return res.status(204).json({
+      status: "success",
+      tour: null,
+    });
+  } catch (err) {
+    console.log(err);
+    return responseUtils.sendErrorResponse(
+      500,
+      "Error while deleting tour",
       res
     );
   }

@@ -1,4 +1,5 @@
 <div *ngIf="tour" class="card mb-5 mt-5 mx-auto card-details">
+  <div *ngIf="successMessage" class="alert alert-success">{{successMessage}}</div>
   <img class="card-img-top" [src]="tour.image" alt="Card image cap">
   <div class="card-body">
     <h1 class="card-title">Title: {{tour.title}}</h1>
@@ -7,6 +8,7 @@
     <p class="card-text">Amount For Booking: {{tour.amountPerHead}}</p>
     <p class="card-text">Tour Start Date: {{tour.startDate}}</p>
     <p class="card-text">Tour End Date: {{tour.endDate}}</p>
+    <button class="btn btn-danger mt-4" (click)="deleteTour(tour.id)">Delete Tour</button>
   </div>
 </div>
 

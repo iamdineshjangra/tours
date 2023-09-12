@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ToursResponse, TourResponse, Tour} from '../models/tour';
+import { ToursResponse, TourResponse, Tour } from '../models/tour';
 
 @Injectable({
   providedIn: 'root',
@@ -16,5 +16,9 @@ export class TourService {
 
   getTour(tourId: number): Observable<TourResponse> {
     return this.http.get<TourResponse>(`${this.apiUrl}/${tourId}`);
+  }
+
+  deleteTour(tourId: number): Observable<null> {
+    return this.http.delete<null>(`${this.apiUrl}/${tourId}`);
   }
 }

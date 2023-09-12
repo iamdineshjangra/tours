@@ -11,6 +11,13 @@ router
     tourController.createTour
   )
   .get(authController.protector, tourController.getTours);
-router.route("/:tourId").get(authController.protector, tourController.getTour);
+router
+  .route("/:tourId")
+  .get(authController.protector, tourController.getTour)
+  .delete(
+    authController.protector,
+    authController.authorization("admin", "organizer"),
+    tourController.deleteTour
+  );
 
 module.exports = router;
