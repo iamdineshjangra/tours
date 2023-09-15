@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Tour } from 'src/app/core/models/tour';
 import { TourService } from 'src/app/core/services/tour.service';
 
@@ -8,9 +9,10 @@ import { TourService } from 'src/app/core/services/tour.service';
   templateUrl: './tours.component.html',
   styleUrls: ['./tours.component.scss'],
 })
-export class ToursComponent implements OnInit {
+export class ToursComponent implements OnInit, OnDestroy {
   tours: Tour[] = [];
   errMessage: string = '';
+  searchedTour: Subscription | undefined;
   constructor(
     private tourService: TourService,
     private route: ActivatedRoute,
@@ -19,6 +21,7 @@ export class ToursComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllTours();
+    this.getFilteredTours();
   }
 
   getAllTours() {
@@ -52,5 +55,19 @@ export class ToursComponent implements OnInit {
 
   goToTourDetailsPage(tourId: number) {
     return this.router.navigate(['tours', tourId]);
+  }
+
+  getFilteredTours() {
+    this.searchedTour = this.tourService.filteredTours.subscribe({
+      next: (data) => {
+        this.tours = data;
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    if(this.searchedTour) {
+      this.searchedTour.unsubscribe();
+    }
   }
 }

@@ -17,8 +17,9 @@
                     <a class="nav-link header-anchor-text-color cursor-pointer" (click)="logout()">Logout</a>
                 </li>
             </ul>
-            <form class="d-flex nav-form">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex nav-form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+                <input [ngbTypeahead]="search" [resultFormatter]="formatter" class="form-control me-2" type="text"
+                    placeholder="Search By Tour Name" aria-label="Search" formControlName="search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>

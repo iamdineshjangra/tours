@@ -1,20 +1,22 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, JsonPipe } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { ConfirmPasswordDirective } from './directives/confirm-password.directive';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { RouterModule } from '@angular/router';
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    ConfirmPasswordDirective,
-    SpinnerComponent,
-  ],
+  declarations: [HeaderComponent, ConfirmPasswordDirective, SpinnerComponent],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    NgbTypeaheadModule,
+    ReactiveFormsModule,
+    FormsModule,
+    JsonPipe,
   ],
-  exports: [HeaderComponent, ConfirmPasswordDirective]
+  exports: [HeaderComponent, ConfirmPasswordDirective],
 })
-export class SharedModule { }
+export class SharedModule {}
