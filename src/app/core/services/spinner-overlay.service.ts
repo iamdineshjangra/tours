@@ -12,15 +12,23 @@ export class SpinnerOverlayService {
   constructor(private overlay: Overlay) {}
 
   public show() {
+    // Check if there's already a portal attached, and detach it if necessary
+    if (this.overlayRef && this.overlayRef.hasAttached()) {
+      this.overlayRef.detach();
+    }
+
+    // Create OverlayRef (which is a PortalHost) if it doesn't exist
     if (!this.overlayRef) {
       this.overlayRef = this.overlay.create();
-      const spinnerOverlayPortal = new ComponentPortal(SpinnerComponent);
-      const component = this.overlayRef.attach(spinnerOverlayPortal) 
     }
+
+    // Create ComponentPortal that can be attached to a PortalHost
+    const spinnerOverlayPortal = new ComponentPortal(SpinnerComponent);
+    const component = this.overlayRef.attach(spinnerOverlayPortal); // Attach ComponentPortal to PortalHost
   }
 
   public hide() {
-    if (!!this.overlayRef) {
+    if (this.overlayRef && this.overlayRef.hasAttached()) {
       this.overlayRef.detach();
     }
   }

@@ -50,7 +50,6 @@ export class SearchedTourComponent implements OnInit {
     if(this.tours) {
       const searchedString = this.router.url.split('/')[2]
       const originalSearchedString = searchedString.replace(/%20/g, ' ');
-      console.log('come')
       this.tours = this.tours.filter(tour => tour.title.toLowerCase() === originalSearchedString.toLowerCase());
     }
   }
