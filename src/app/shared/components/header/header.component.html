@@ -20,7 +20,6 @@
             <form class="d-flex nav-form">
                 <input [ngbTypeahead]="search" [resultFormatter]="formatter" (selectItem)="onSearchResultSelected($event)" class="form-control me-2" type="text"
                     placeholder="Search By Tour Name" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
     </div>

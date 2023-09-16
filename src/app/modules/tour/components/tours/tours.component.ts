@@ -1,8 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { Tour } from 'src/app/core/models/tour';
-import { TourService } from 'src/app/core/services/tour.service';
 
 @Component({
   selector: 'app-tours',
@@ -48,9 +46,5 @@ export class ToursComponent implements OnInit {
         console.error(error.error.errMessage);
       },
     });
-  }
-
-  goToTourDetailsPage(tourId: number) {
-    return this.router.navigate(['tours', tourId]);
   }
 }

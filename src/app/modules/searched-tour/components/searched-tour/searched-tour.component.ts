@@ -53,9 +53,4 @@ export class SearchedTourComponent implements OnInit {
       this.tours = this.tours.filter(tour => tour.title.toLowerCase() === originalSearchedString.toLowerCase());
     }
   }
-
-  goToTourDetailsPage(tourId: number) {
-    return this.router.navigate(['tours', tourId]);
-  }
-
 }

@@ -1,0 +1,10 @@
+<div *ngIf="tour" class="card" style="width: 17rem;">
+    <img [src]="tour.image" class="card-img-top card-image cursor-pointer" (click)="goToTourDetailsPage(tour.id)">
+    <div class="card-body text-center">
+        <h5 class="card-title" style="font-weight:bold;">Title : {{tour.title}}</h5>
+        <h6 style="font-weight:bold;">Booking Amount: {{tour.amountPerHead | currency:
+            'INR'}}</h6>
+        <p class="card-text">Organizer : {{tour.organizer}}</p>
+        <button class="btn btn-primary" (click)="goToTourDetailsPage(tour.id)">See Tour Details</button>
+    </div>
+</div>
