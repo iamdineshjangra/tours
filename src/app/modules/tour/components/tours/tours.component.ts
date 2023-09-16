@@ -12,7 +12,6 @@ export class ToursComponent implements OnInit {
   errMessage: string = '';
   constructor(
     private route: ActivatedRoute,
-    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -37,13 +36,10 @@ export class ToursComponent implements OnInit {
           data['tours'].error.errMessage
         ) {
           this.errMessage = data['tours'].error.errMessage;
-          console.error(this.errMessage);
-          return;
         }
       },
       error: (error) => {
         this.errMessage = error.error.errMessage;
-        console.error(error.error.errMessage);
       },
     });
   }

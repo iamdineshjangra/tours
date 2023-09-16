@@ -35,13 +35,10 @@ export class SearchedTourComponent implements OnInit {
           data['searchedTours'].error.errMessage
         ) {
           this.errMessage = data['searchedTours'].error.errMessage;
-          console.error(this.errMessage);
-          return;
         }
       },
       error: (error) => {
         this.errMessage = error.error.errMessage;
-        console.error(error.error.errMessage);
       },
     });
   }
