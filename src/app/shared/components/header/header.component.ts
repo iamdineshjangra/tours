@@ -1,13 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, OperatorFunction, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import {
-  FormBuilder,
-  FormGroup
-} from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Tour } from 'src/app/core/models/tour';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { TourService } from 'src/app/core/services/tour.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -17,14 +15,13 @@ import { TourService } from 'src/app/core/services/tour.service';
 export class HeaderComponent implements OnInit {
   tours: Tour[] = [];
   filteredTour: Tour[] = [];
-  searchForm: any = FormGroup;
   constructor(
     private authService: AuthService,
     private tourService: TourService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
     this.isAuthenticated();
-    this.searchFormValidation();
   }
 
   ngOnInit(): void {
@@ -38,12 +35,6 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.getAllTours();
-  }
-
-  searchFormValidation() {
-    this.searchForm = this.formBuilder.group({
-      search: ['', []],
-    });
   }
 
   getAllTours() {
@@ -85,13 +76,9 @@ export class HeaderComponent implements OnInit {
       })
     );
 
-  onSubmit() {
-    if (!this.searchForm.value.search) {
-      return;
+  onSearchResultSelected(selectedItem: any) {
+    if (selectedItem.item) {
+      this.router.navigate(['searchedTour', selectedItem.item]);
     }
-    return this.tourService.getSearchedTour(
-      this.searchForm.value.search,
-      this.tours
-    );
   }
 }

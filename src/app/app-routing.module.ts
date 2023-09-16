@@ -35,6 +35,11 @@ const routes: Routes = [
     loadChildren: () => import('../app/modules/user/user.module').then(m => m.UserModule)
   },
   {
+    path: 'searchedTour/:searchedTour',
+    canActivate: [authGuard],
+    loadChildren: () => import('../app/modules/searched-tour/searched-tour.module').then(m => m.SearchedTourModule)
+  },
+  {
     path: '**',
     redirectTo: 'tours',
   }

@@ -8,7 +8,6 @@ import { ToursResponse, TourResponse, Tour } from '../models/tour';
 })
 export class TourService {
   apiUrl = 'http://localhost:4100/api/v1/tours';
-  filteredTours = new Subject<Tour[]>();
   constructor(private http: HttpClient) {}
 
   getAllTours(): Observable<ToursResponse> {
@@ -22,16 +21,4 @@ export class TourService {
   deleteTour(tourId: number): Observable<null> {
     return this.http.delete<null>(`${this.apiUrl}/${tourId}`);
   }
-
-  getSearchedTour(value: string, tours: Tour[]) {
-    if (tours && tours.length) {
-      const filteredTours = tours.filter((tour) =>
-        tour.title.toLowerCase().includes(value.toLowerCase())
-      );
-       this.filteredTours.next(filteredTours);
-    } else {
-       this.filteredTours.next([]);
-    }
-  }
-
 }

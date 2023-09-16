@@ -9,19 +9,16 @@ import { TourService } from 'src/app/core/services/tour.service';
   templateUrl: './tours.component.html',
   styleUrls: ['./tours.component.scss'],
 })
-export class ToursComponent implements OnInit, OnDestroy {
+export class ToursComponent implements OnInit {
   tours: Tour[] = [];
   errMessage: string = '';
-  searchedTour: Subscription | undefined;
   constructor(
-    private tourService: TourService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.getAllTours();
-    this.getFilteredTours();
   }
 
   getAllTours() {
@@ -55,19 +52,5 @@ export class ToursComponent implements OnInit, OnDestroy {
 
   goToTourDetailsPage(tourId: number) {
     return this.router.navigate(['tours', tourId]);
-  }
-
-  getFilteredTours() {
-    this.searchedTour = this.tourService.filteredTours.subscribe({
-      next: (data) => {
-        this.tours = data;
-      }
-    })
-  }
-
-  ngOnDestroy(): void {
-    if(this.searchedTour) {
-      this.searchedTour.unsubscribe();
-    }
   }
 }

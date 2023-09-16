@@ -12,15 +12,11 @@ export class SpinnerOverlayService {
   constructor(private overlay: Overlay) {}
 
   public show() {
-    // Returns an OverlayRef (which is a PortalHost)
-
     if (!this.overlayRef) {
       this.overlayRef = this.overlay.create();
+      const spinnerOverlayPortal = new ComponentPortal(SpinnerComponent);
+      const component = this.overlayRef.attach(spinnerOverlayPortal) 
     }
-
-    // Create ComponentPortal that can be attached to a PortalHost
-    const spinnerOverlayPortal = new ComponentPortal(SpinnerComponent);
-    const component = this.overlayRef.attach(spinnerOverlayPortal) // Attach ComponentPortal to PortalHost
   }
 
   public hide() {

@@ -1,6 +1,6 @@
 <nav *ngIf="isAuthenticated()" class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #e3f2fd;">
     <div class="container-fluid">
-        <a class="navbar-brand nav-log-text" href="#">Tour</a>
+        <a class="navbar-brand nav-log-text" routerLink="/tours">Tour</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item nav-margin-right">
-                    <a class="nav-link header-anchor-text-color" href="#">My-Tours</a>
+                    <a class="nav-link header-anchor-text-color">My-Tours</a>
                 </li>
                 <li class="nav-item nav-margin-right">
                     <a class="nav-link header-anchor-text-color cursor-pointer" routerLink="/users/me">Me</a>
@@ -17,9 +17,9 @@
                     <a class="nav-link header-anchor-text-color cursor-pointer" (click)="logout()">Logout</a>
                 </li>
             </ul>
-            <form class="d-flex nav-form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-                <input [ngbTypeahead]="search" [resultFormatter]="formatter" class="form-control me-2" type="text"
-                    placeholder="Search By Tour Name" aria-label="Search" formControlName="search">
+            <form class="d-flex nav-form">
+                <input [ngbTypeahead]="search" [resultFormatter]="formatter" (selectItem)="onSearchResultSelected($event)" class="form-control me-2" type="text"
+                    placeholder="Search By Tour Name" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
