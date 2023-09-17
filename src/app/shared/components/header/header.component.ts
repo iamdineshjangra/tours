@@ -15,14 +15,13 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   tours: Tour[] = [];
   filteredTour: Tour[] = [];
+
   constructor(
     private authService: AuthService,
     private tourService: TourService,
     private formBuilder: FormBuilder,
     private router: Router
-  ) {
-    this.isAuthenticated();
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getAllTours();
@@ -32,9 +31,12 @@ export class HeaderComponent implements OnInit {
     return this.authService.isAuthenticated();
   }
 
+  userRole() {
+    return localStorage.getItem('role');
+  }
+
   logout() {
     this.authService.logout();
-    this.getAllTours();
   }
 
   getAllTours() {

@@ -21,7 +21,8 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   isAuthenticated() {
-    return localStorage.getItem('token');
+    console.log('inAuthenticated')
+    return localStorage.getItem('token') && localStorage.getItem('role')
   }
 
   signup(value: Signup): Observable<UserResponse> {
