@@ -79,6 +79,9 @@ export class SignupComponent implements OnInit {
           setTimeout(()=>{
             this.successMessage = '';
             localStorage.setItem('token', data.token);
+            if (data && data.user && data.user.role) {
+              localStorage.setItem('role', data.user.role);
+            }
             this.router.navigate(['tours']);
           },3000)
         }

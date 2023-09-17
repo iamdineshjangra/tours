@@ -17,6 +17,7 @@ export class TourDetailsComponent implements OnInit, OnDestroy {
   successMessage: string = '';
   tourId: number | undefined;
   deleteSubscription: Subscription | undefined;
+  role = localStorage.getItem('role');
   constructor(
     private route: ActivatedRoute,
     private tourService: TourService,

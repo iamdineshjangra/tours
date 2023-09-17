@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   loginForm: any = FormGroup;
   errMessage: string = '';
   successMessage: string = '';
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit{
     private authService: AuthService,
     private router: Router
   ) {
-    if(this.authService.isAuthenticated()) {
+    if (this.authService.isAuthenticated()) {
       this.router.navigate(['tours']);
     }
   }
@@ -47,23 +47,26 @@ export class LoginComponent implements OnInit{
 
   onSubmit() {
     if (this.loginForm.invalid) {
-      this.errMessage = 'Please enter all required field with correct data.'
+      this.errMessage = 'Please enter all required field with correct data.';
       return this.removeErrorMessage();
     }
     this.authService.login(this.loginForm.value).subscribe({
       next: (data) => {
         if (data) {
-          this.successMessage = 'Logged in successfully'
-          setTimeout(()=> {
+          this.successMessage = 'Logged in successfully';
+          setTimeout(() => {
             this.successMessage = '';
             localStorage.setItem('token', data.token);
+            if (data && data.user && data.user.role) {
+              localStorage.setItem('role', data.user.role);
+            }
             this.router.navigate(['tours']);
-          }, 3000)
+          }, 3000);
         }
       },
       error: (err) => {
         this.errMessage = err.error.errMessage;
-        return this.removeErrorMessage()
+        return this.removeErrorMessage();
       },
     });
   }
@@ -71,7 +74,6 @@ export class LoginComponent implements OnInit{
   removeErrorMessage() {
     setTimeout(() => {
       this.errMessage = '';
-    }, 3000)
+    }, 3000);
   }
-
 }
