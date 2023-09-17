@@ -11,7 +11,7 @@
                     <a class="nav-link header-anchor-text-color">My-Tours</a>
                 </li>
                 <li *ngIf="userRole() !== 'user'" class="nav-item nav-margin-right">
-                    <a class="nav-link header-anchor-text-color">Create-Tour {{userRole()}}</a>
+                    <a class="nav-link header-anchor-text-color">Create-Tour</a>
                 </li>
                 <li class="nav-item nav-margin-right">
                     <a class="nav-link header-anchor-text-color cursor-pointer" routerLink="/users/me">Me</a>
@@ -20,7 +20,7 @@
                     <a class="nav-link header-anchor-text-color cursor-pointer" (click)="logout()">Logout</a>
                 </li>
             </ul>
-            <form class="d-flex nav-form">
+            <form class="d-flex" [ngClass]="userRole() !== 'user' ? 'nav-form' : 'nav-form-user'">
                 <input [ngbTypeahead]="search" [resultFormatter]="formatter" (selectItem)="onSearchResultSelected($event)" class="form-control me-2" type="text"
                     placeholder="Search By Tour Name" aria-label="Search">
             </form>
