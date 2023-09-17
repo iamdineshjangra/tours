@@ -1,0 +1,23 @@
+<div class="container mt-3 mb-3">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>Delete {{genericMessage}}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <h5 class="text-danger mb-4">
+                Are you sure you want to delete this {{genericMessage}}?
+            </h5>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-3 col-sm-6 text-center">
+            <button type="button" class="btn btn-secondary btn-lg btn-block cancelbtn"
+                (click)="onCancel()">Cancel</button>
+        </div>
+        <div class="col-md-3 col-sm-6 text-center">
+            <button type="button" class="btn btn-danger btn-lg btn-block deletebtn" (click)="onDelete()">Delete</button>
+        </div>
+    </div>
+</div>

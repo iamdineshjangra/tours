@@ -4,6 +4,7 @@ import { ToursComponent } from './components/tours/tours.component';
 import { TourRoutingModule } from './tour-routing.module';
 import { TourDetailsComponent } from './components/tour-details/tour-details.component';
 import { TourComponent } from './components/tour/tour.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -15,7 +16,8 @@ import { TourComponent } from './components/tour/tour.component';
   ],
   imports: [
     CommonModule,
-    TourRoutingModule
+    TourRoutingModule,
+    SharedModule
   ],
   exports: [TourComponent]
 })

@@ -1,10 +1,10 @@
-<div class="tour-success-error container-fluid" [ngClass]="{'mt-3': errMessage}">
+<div class="tour-success-error container-fluid" [ngClass]="{'mt-3': errMessage || successMessage}">
   <div class="row">
     <div *ngIf="errMessage" class="alert alert-danger">{{errMessage}}</div>
     <div *ngIf="successMessage" class="alert alert-success">{{successMessage}}</div>
   </div>
 </div>
-<div *ngIf="tour" class="card mb-5 mx-auto card-details" [ngClass]="{'mt-5': !errMessage}">
+<div *ngIf="tour" class="card mb-5 mx-auto card-details" [ngClass]="((errMessage && !successMessage) || (!errMessage && successMessage)) ? '' : 'mt-5'">
   <img class="card-img-top" [src]="tour.image" alt="Card image cap">
   <div class="card-body">
     <h1 class="card-title">Title: {{tour.title}}</h1>
