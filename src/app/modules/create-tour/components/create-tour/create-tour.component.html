@@ -25,7 +25,7 @@
             </div>
             <div>
                 <label class="d-block form-label">Tourist Capacity</label>
-                <input class="form-control d-block form-field-input" type="text" formControlName="maxPersonCapacity"
+                <input class="form-control d-block form-field-input" type="number" formControlName="maxPersonCapacity"
                     required>
             </div>
             <div *ngIf="f.maxPersonCapacity.errors">
@@ -42,7 +42,7 @@
             </div>
             <div>
                 <label class="d-block form-label">Amount Per Head</label>
-                <input class="form-control d-block form-field-input" type="text" formControlName="amountPerHead"
+                <input class="form-control d-block form-field-input" type="number" formControlName="amountPerHead"
                     required>
             </div>
             <div *ngIf="f.amountPerHead.errors">
@@ -63,7 +63,7 @@
                         data-toggle="tooltip" data-placement="top"
                         title="If you will not enter start date then start date will be a day after today, Format: 2023-09-18 07:44:28">
                         ?</button></label>
-                <input class="form-control d-block form-field-input" type="text" formControlName="startDate"
+                <input class="form-control d-block form-field-input" type="datetime" formControlName="startDate"
                     placeholder="Optional">
             </div>
             <div>
@@ -71,7 +71,7 @@
                         data-toggle="tooltip" data-placement="top"
                         title="If you will not enter end date then end date will be two days after today Format: 2023-09-18 07:44:28">
                         ?</button></label>
-                <input class="form-control d-block form-field-input" type="text" formControlName="endDate"
+                <input class="form-control d-block form-field-input" type="datetime" formControlName="endDate"
                     placeholder="Optional">
             </div>
             <button class="btn btn-primary form-button" [disabled]="!createTourForm.valid">Create Tour</button>
