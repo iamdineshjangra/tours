@@ -28,10 +28,11 @@ exports.createTour = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({
-      status: "fail",
-      errMessage: "Error while creating tours",
-    });
+    return responseUtils.sendErrorResponse(
+      500,
+      "Error while creating tours",
+      res
+    );
   }
 };
 

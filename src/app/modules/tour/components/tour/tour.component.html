@@ -1,5 +1,6 @@
 <div *ngIf="tour" class="card" style="width: 17rem;">
-    <img [src]="tour.image" class="card-img-top card-image cursor-pointer" (click)="goToTourDetailsPage(tour.id)">
+    <img *ngIf="tour.image" [src]="tour.image" class="card-img-top card-image cursor-pointer" (click)="goToTourDetailsPage(tour.id)">
+    <img *ngIf="!tour.image" src="assets/images/generic.jpg" class="card-img-top card-image cursor-pointer" (click)="goToTourDetailsPage(tour.id)">
     <div class="card-body text-center">
         <h5 class="card-title" style="font-weight:bold;">Title : {{tour.title}}</h5>
         <h6 style="font-weight:bold;">Booking Amount: {{tour.amountPerHead | currency:

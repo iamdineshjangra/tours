@@ -11,7 +11,7 @@
                     <a class="nav-link header-anchor-text-color">My-Tours</a>
                 </li>
                 <li *ngIf="userRole() !== 'user'" class="nav-item nav-margin-right">
-                    <a class="nav-link header-anchor-text-color">Create-Tour</a>
+                    <a class="nav-link header-anchor-text-color cursor-pointer" routerLink="/createTour">Create-Tour</a>
                 </li>
                 <li class="nav-item nav-margin-right">
                     <a class="nav-link header-anchor-text-color cursor-pointer" routerLink="/users/me">Me</a>

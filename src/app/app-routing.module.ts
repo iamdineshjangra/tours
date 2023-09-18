@@ -40,6 +40,11 @@ const routes: Routes = [
     loadChildren: () => import('../app/modules/searched-tour/searched-tour.module').then(m => m.SearchedTourModule)
   },
   {
+    path: 'createTour',
+    canActivate: [authGuard],
+    loadChildren: () => import('../app/modules/create-tour/create-tour.module').then(m => m.CreateTourModule)
+  },
+  {
     path: '**',
     redirectTo: 'tours',
   }

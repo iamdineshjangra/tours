@@ -1,6 +1,7 @@
 <div *ngIf="tours && tours.length" class="container">
     <div class="row d-flex justify-content-center">
         <div class="col-lg-4 col-md-6 col-sm-6 col-10 card-margin" *ngFor="let tour of tours">
+            <div *ngIf="errMessage" class="alert alert-danger mt-3">{{errMessage}}</div>
             <app-tour [tour]="tour"></app-tour>
         </div>
     </div>
@@ -11,5 +12,5 @@
 </div>
 
 <div *ngIf="errMessage" class="err-message">
-    <h1>{{errMessage}}</h1>
+    <h1>{{errMessage}}...</h1>
 </div>

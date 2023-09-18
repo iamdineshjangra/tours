@@ -56,7 +56,6 @@ module.exports = (sequelize, Sequelize, DataType) => {
     },
     image: {
       type: Sequelize.STRING,
-      allowNull: false
     },
     startDate: {
       type: Sequelize.DATE,

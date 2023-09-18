@@ -5,7 +5,8 @@
   </div>
 </div>
 <div *ngIf="tour" class="card mb-5 mx-auto card-details" [ngClass]="((errMessage && !successMessage) || (!errMessage && successMessage)) ? '' : 'mt-5'">
-  <img class="card-img-top" [src]="tour.image" alt="Card image cap">
+  <img *ngIf="tour.image" class="card-img-top" [src]="tour.image" alt="Card image cap">
+  <img *ngIf="!tour.image" class="card-img-top" src="assets/images/generic.jpg" alt="Card image cap">
   <div class="card-body">
     <h1 class="card-title">Title: {{tour.title}}</h1>
     <p class="card-text">Organizer: {{tour.organizer}}</p>
