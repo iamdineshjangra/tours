@@ -31,7 +31,20 @@ module.exports = async (req, res, next) => {
           res
         );
       }
-      startDate = moment(startDate).utcOffset(userTimeZone).toISOString();
+      const startExpectedDate = moment().add(1, "day").toISOString();
+      var providedStartDate = moment(startDate)
+        .add(10, "seconds")
+        .utcOffset(userTimeZone)
+        .toISOString();
+      if (providedStartDate > startExpectedDate) {
+        startDate = moment(startDate).utcOffset(userTimeZone).toISOString();
+      } else {
+        return responseUtils.sendErrorResponse(
+          400,
+          "Start date should be 1 day greater than now",
+          res
+        );
+      }
     }
 
     if (endDate) {
@@ -42,7 +55,24 @@ module.exports = async (req, res, next) => {
           res
         );
       }
-      endDate = moment(endDate).utcOffset(userTimeZone).toISOString();
+      const endExpectedDate = moment().add(2, "day").toISOString();
+      var providedEndDate = moment(endDate)
+        .add(10, "seconds")
+        .utcOffset(userTimeZone)
+        .toISOString();
+      if (providedEndDate > endExpectedDate) {
+        endDate = moment(endDate).utcOffset(userTimeZone).toISOString();
+      } else {
+        return responseUtils.sendErrorResponse(
+          400,
+          "End date should be 2 day greater than now",
+          res
+        );
+      }
+    }
+
+    if(providedEndDate < providedStartDate) {
+      return responseUtils.sendErrorResponse(400, "End Date should be greater than start date", res)
     }
 
     if (image && typeof image === "string" && !image.startsWith("assets")) {

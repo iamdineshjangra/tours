@@ -1,3 +1,6 @@
+const moment = require("moment");
+const userTimeZone = moment().format("Z");
+
 module.exports = (sequelize, Sequelize, DataType) => {
   const Tour = sequelize.define("tours", {
     id: {
@@ -59,7 +62,7 @@ module.exports = (sequelize, Sequelize, DataType) => {
     },
     startDate: {
       type: Sequelize.DATE,
-      defaultValue: new Date(Date.now() + 24 * 60 * 60 * 1000),
+      defaultValue: moment().add(1, "day").toDate(),
       validate: {
         isDate: {
           args: true,
@@ -69,7 +72,7 @@ module.exports = (sequelize, Sequelize, DataType) => {
     },
     endDate: {
       type: Sequelize.DATE,
-      defaultValue: new Date(Date.now() + 24 * 2 * 60 * 60 * 1000),
+      defaultValue: moment().add(2, "day").toDate(),
       validate: {
         isDate: {
           args: true,
