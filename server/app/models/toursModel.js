@@ -1,7 +1,6 @@
 const moment = require("moment");
-const userTimeZone = moment().format("Z");
 
-module.exports = (sequelize, Sequelize, DataType) => {
+module.exports = (sequelize, Sequelize, DataType, db) => {
   const Tour = sequelize.define("tours", {
     id: {
       type: Sequelize.INTEGER.UNSIGNED,
@@ -81,5 +80,9 @@ module.exports = (sequelize, Sequelize, DataType) => {
       },
     },
   });
+  Tour.hasMany(db.Review, {
+    foreignKey: "tourId",
+    onDelete: 'CASCADE',
+  })
   return Tour;
 };

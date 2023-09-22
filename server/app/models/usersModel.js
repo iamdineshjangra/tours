@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-module.exports = (sequelize, Sequelize, DataTypes) => {
+module.exports = (sequelize, Sequelize, DataTypes, db) => {
   const User = sequelize.define("users", {
     id: {
       type: Sequelize.INTEGER.UNSIGNED,
@@ -58,6 +58,10 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       type: Sequelize.BIGINT,
     },
   });
+  User.hasMany(db.Review, {
+    foreignKey: "userId",
+    onDelete: 'CASCADE',
+  })
   User.beforeCreate(hashPassword);
   User.beforeUpdate(hashPassword);
   User.prototype.validatePassword = validatePassword;
