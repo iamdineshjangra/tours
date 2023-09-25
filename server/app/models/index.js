@@ -1,7 +1,7 @@
 const dbConfig = require("../config/db.config");
 const {Sequelize, DataTypes} = require("sequelize");
 const createTables = require('../utils/createTables')
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
+const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, process.env.DB_PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
   operatorsAliases: false,
